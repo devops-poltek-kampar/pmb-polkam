@@ -1,0 +1,292 @@
+a.btn:visited {
+    color: white;
+}
+
+a.link:hover,
+a.link,
+a.link:visited {
+    color: #ff5722;
+    font-weight: 700;
+}
+
+nav.meta-login ul li:first-child {
+    font-weight: bold;
+}
+
+#secondary li > div.simi-co > p.meta {
+    font: 11px Montserrat, sans-serif;
+}
+
+img.quote_img {
+    max-width: 95px;
+    max-height: 95px;
+}
+
+.courses.list-group-item .course_space {
+    min-width: 500px;
+}
+
+.flexslider .slides li {
+    min-height: auto;
+}
+
+.flexslider .slides li img {
+    min-height: auto;
+}
+
+#login-form input {
+    width: 97%;
+    padding: 10px 30px;
+    background: #eff4f8;
+    margin-top: -1px;
+}
+
+#login-form button {
+    width: 88%;
+    padding: 18px;
+}
+
+.register-form label {
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.form-control {
+    box-shadow: none;
+}
+
+select.form-control {
+    width: 100%;
+    top: 15px;
+}
+
+label + select.form-control {
+    top: 50px;
+    border: 1px solid #e4e8ee;
+    border-top-color: rgb(228, 232, 238);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(228, 232, 238);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(228, 232, 238);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(228, 232, 238);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+    border: 1px solid #ffb11d;
+}
+
+.form-control:focus {
+    border-color: #ffb11d;
+}
+
+.select2.select2-container {
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+}
+
+.select2.select2-container--open .select2-selection {
+    border: 1px solid #ffb11d;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.select2-selection.select2-selection--single {
+    padding: 2px 0;
+    height: 34px;
+    border: 1px solid #e4e8ee;
+    border-top-color: rgb(228, 232, 238);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(228, 232, 238);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(228, 232, 238);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(228, 232, 238);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    top: 4px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 10px;
+}
+
+select.form-control {
+    padding: 6px 8px;
+}
+
+.btn i {
+    margin: 0 5px 0 0;
+    top: 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.b500 {
+    font-weight: 500;
+}
+
+.mt-4 {
+    margin-top: 1.75em;
+}
+
+.mb-4 {
+    margin-bottom: 1.75em;
+}
+
+.info h3 {
+    margin-top: 45px;
+    margin-bottom: 0px;
+}
+
+.info input {
+    padding: 6px 12px;
+    width: 100%;
+    color: #666;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    border: 1px solid #e4e8ee;
+    border-radius: 0px;
+}
+
+.info label {
+    margin-top: 15px;
+    color: #555;
+    font-size: 13pt;
+    line-height: 13pt;
+}
+
+.info p {
+    color: #343434;
+    font-size: 12pt;
+    line-height: 12pt;
+    margin-bottom: 10px;
+}
+
+/* Theme */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-nav > li:hover > a,
+.navbar-nav > li > .dropdown-menu,
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.well .btn-group a:hover.btn-default,
+.well .btn-group a:focus.btn-default,
+.well .btn-group a:active.btn-default,
+.well .btn-group a.active {
+    background-color: #ffb11d;
+}
+
+.dropdown-menu > li > a {
+    color: #fff;
+}
+
+#primary header.entry-header h1,
+.aboutus h3,
+.contact-widget i,
+nav.meta-login ul li a:hover,
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover,
+a.read-more i,
+a:hover.read-more {
+    color: #ffb11d;
+}
+
+.news-widget ul li p.title a:hover,
+#secondary .widget a:hover {
+    color: #ffb11d;
+}
+
+.well .btn-group a:hover.btn-default,
+.well .btn-group a:focus.btn-default,
+.well .btn-group a:active.btn-default,
+.well .btn-group a.active {
+    background: #ffb11d;
+    border: 1px solid #ffb11d;
+}
+
+/* Theme Form */
+button:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+button:active,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+    background-color: #ffb11d;
+}
+
+a.link:hover,
+a.link,
+a.link:visited,
+a:hover,
+a:focus,
+a:active {
+    color: #ffa01a;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    background-color: #ffb11d;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+    background-color: #ffa01a;
+}
+
+.swal-button {
+    background-color: #ffb11d;
+}
+
+.swal-button:active {
+    background-color: #ffa01a;
+}
