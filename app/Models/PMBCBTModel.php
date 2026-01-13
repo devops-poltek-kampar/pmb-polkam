@@ -9,6 +9,7 @@ class PMBCBTModel extends Model
 {
     protected $table = "pmb_cbt";
     protected $keyType = "string";
+    public $incrementing = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',

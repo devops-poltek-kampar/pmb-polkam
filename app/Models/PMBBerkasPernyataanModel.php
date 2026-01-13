@@ -9,6 +9,8 @@ class PMBBerkasPernyataanModel extends Model
 {
     protected $table = "pmb_berkas_pernyataan";
     protected $keyType = "string";
+    protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
         'id',
         "nomor_registrasi",

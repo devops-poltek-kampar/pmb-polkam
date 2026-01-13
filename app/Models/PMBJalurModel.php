@@ -9,6 +9,7 @@ class PMBJalurModel extends Model
 
     protected $table = "pmb_jalur";
     protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = ['id', 'nama'];
 }

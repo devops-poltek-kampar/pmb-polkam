@@ -12,6 +12,7 @@ class PMBGelombangModel extends Model
     protected $table = "pmb_gelombang";
     protected $keyType = 'string';
     protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
         'id',
         'tahun',

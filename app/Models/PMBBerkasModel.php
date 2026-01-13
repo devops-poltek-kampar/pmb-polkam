@@ -9,6 +9,8 @@ class PMBBerkasModel extends Model
 {
     protected $table = "pmb_berkas";
     protected $keyType = "string";
+    protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
         'id',
         "pmb_pengajuan_berkas_id",

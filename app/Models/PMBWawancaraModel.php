@@ -10,7 +10,7 @@ class PMBWawancaraModel extends Model
     protected $table = "pmb_wawancara";
     protected $primaryKey = 'id';
     protected $keyType = "string";
-
+    public $incrementing = false;
     protected $fillable = [
         'id',
         "nomor_registrasi",

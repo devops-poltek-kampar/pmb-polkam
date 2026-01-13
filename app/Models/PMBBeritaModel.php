@@ -8,6 +8,8 @@ class PMBBeritaModel extends Model
 {
     protected $table = "pmb_berita";
     protected $keyType = "string";
+
+    public $incrementing = false;
     protected $fillable = [
         'id',
         "subjek",

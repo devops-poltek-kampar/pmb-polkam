@@ -12,6 +12,7 @@ class PMBJalurMasukModel extends Model
     protected $table = "pmb_jalur_masuk";
     protected $keyType = "string";
     protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
         'id',
         'pmb_gelombang_id',
