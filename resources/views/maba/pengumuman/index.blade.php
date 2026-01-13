@@ -41,10 +41,10 @@
             }
 
             /* .status-card {
-                                                                                                        border-radius: 20px;
-                                                                                                        box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
-                                                                                                        animation: fadeInUp .8s ease;
-                                                                                                    } */
+                                                                                                                                                                border-radius: 20px;
+                                                                                                                                                                box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
+                                                                                                                                                                animation: fadeInUp .8s ease;
+                                                                                                                                                            } */
 
             @keyframes fadeInUp {
                 from {
@@ -202,10 +202,10 @@
                                 Seleksi Penerimaan Mahasiswa Baru
                             </p> --}}
                                 <!-- STATUS -->
-                                <div class="alert alert-success fw-bold fs-5">
+                                <div class="alert alert-success fw-bold fs-5 text-center">
                                     🎉 SELAMAT, ANDA DINYATAKAN <span class="text-uppercase">LULUS</span>
+                                    <br> <span class="fs-6">Silahkan melanjutkan ke tahap Registrasi Ulang</span>
                                 </div>
-
 
                                 <!-- DATA PESERTA -->
                                 <table class="table table-borderless mb-4">

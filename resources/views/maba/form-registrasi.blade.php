@@ -12,6 +12,7 @@
                 <label class="form-label mb-3">Keterangan : <span class="text-danger">*</span> Wajib Diisi!</label>
 
                 <input type="hidden" name="pmb_jalur_masuk_id" value="{{ $dataJalur->id }}">
+                <input type="hidden" name="pmb_gelombang_id" value="{{ $dataJalur->pmb_gelombang_id }}">
 
                 <div class="row gy-4">
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
@@ -330,9 +331,8 @@
                         @enderror">
                             <option value="">Pilih</option>
                             @foreach ($dataJalur->prodi as $prodi)
-                                <option value="{{ $prodi->prodi->kode_prodi }}"
-                                    @if (old('prodi_pilihan_1') == $prodi->prodi->kode_prodi) selected @endif>
-                                    {{ $prodi->prodi->nama }} </option>
+                                <option value="{{ $prodi->prodi->kode_prodi }}" @selected(old('prodi_pilihan_1') == $prodi->prodi->kode_prodi)>
+                                    {{ $prodi->jenjang }} {{ $prodi->prodi->nama }} </option>
                             @endforeach
 
                         </select>

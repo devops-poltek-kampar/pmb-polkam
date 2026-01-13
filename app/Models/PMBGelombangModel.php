@@ -26,4 +26,9 @@ class PMBGelombangModel extends Model
     {
         return $this->hasMany(PMBJalurMasukModel::class, "pmb_gelombang_id", "id");
     }
+
+    public function registrasi(): HasMany
+    {
+        return $this->hasMany(PMBRegistrasiModel::class, "pmb_gelombang_id", 'id');
+    }
 }

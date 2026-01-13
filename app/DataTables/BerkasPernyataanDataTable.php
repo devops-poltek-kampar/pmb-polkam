@@ -127,6 +127,7 @@ class BerkasPernyataanDataTable extends DataTable
             ->setTableId('berkaspernyataan-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->scrollX(true)
             ->parameters([
                 'autoWidth' => false,
                 // 'dom' => 'Bfrtip',

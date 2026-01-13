@@ -271,7 +271,7 @@
                             <i class="bi bi-bank"></i>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">Bank Central</h5>
+                            <h5 class="mb-0 fw-bold">Bank Mandiri</h5>
                             <small class="text-muted">Rekening Pembayaran</small>
                         </div>
                     </div>
@@ -279,15 +279,15 @@
                     <hr>
 
                     <div class="mb-3">
-                        <label class="text-muted">Nama Pemilik</label>
-                        <h6 class="fw-semibold">Rahmat Hamdani</h6>
+                        <label class="text-muted">Atas Nama</label>
+                        <h6 class="fw-semibold">POLITEKNIK KAMPAR</h6>
                     </div>
 
                     <div class="mb-3">
                         <label class="text-muted">Nomor Rekening</label>
                         <div class="d-flex align-items-center">
                             <span id="bca" class="fw-bold fs-5 text-primary">
-                                1234 5678 9012 3456
+                                108-00-1005009-5
                             </span>
                             <button class="btn btn-outline-primary btn-sm ms-3" onclick="copyRek('bca')">
                                 <i class="bi bi-clipboard"></i> Copy
@@ -301,7 +301,7 @@
 
                 </div>
             </div>
-            <div class="card shadow-lg border-0 rounded-4">
+            {{-- <div class="card shadow-lg border-0 rounded-4">
                 <div class="card-body p-4">
 
                     <div class="d-flex align-items-center mb-3">
@@ -339,7 +339,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

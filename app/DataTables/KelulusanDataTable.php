@@ -65,7 +65,7 @@ class KelulusanDataTable extends DataTable
                 }, 'jalur' => function ($queryJalur) {
                     return $queryJalur->select(['id', 'nama']);
                 }])->select(['id', 'pmb_gelombang_id', 'pmb_jalur_id']);
-            }])->select(['id', 'nomor_registrasi', 'nama', 'pmb_jalur_masuk_id']);
+            }])->select(['id', 'nomor_registrasi', 'hp_mahasiswa', 'nama', 'pmb_jalur_masuk_id']);
         }, 'prodi' => function ($queryProdi) {
             return $queryProdi->select(['id', 'kode_prodi', 'nama', 'jenjang']);
         }])->select();
@@ -80,6 +80,7 @@ class KelulusanDataTable extends DataTable
             ->setTableId('kelulusan-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->scrollX(true)
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -99,22 +100,14 @@ class KelulusanDataTable extends DataTable
     {
         return [
             Column::make('registrasi.nama'),
+            Column::make('registrasi.hp_mahasiswa')->title("Nomor HP"),
             Column::make('nomor_registrasi'),
             Column::make("registrasi.jalur_masuk.gelombang.nama")->title("Gelombang"),
             Column::make("registrasi.jalur_masuk.gelombang.tahun")->title("Tahun"),
             Column::make("registrasi.jalur_masuk.jalur.nama")->title("Jalur Registrasi"),
             Column::computed('prodi'),
             Column::computed('status'),
-            Column::make("aksi")
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
-            // Column::make('id'),
-            // Column::make('add your columns'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            // Column::make("aksi")
         ];
     }
 

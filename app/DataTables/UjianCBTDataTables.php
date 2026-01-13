@@ -32,6 +32,9 @@ class UjianCBTDataTables extends DataTable
             })->addColumn("nama", function ($row) {
                 return $row->registrasi->nama;
             })
+            ->addColumn("email", function ($row) {
+                return $row->registrasi->users->email;
+            })
             ->addColumn("gelombang", function ($row) {
                 return $row->registrasi->jalur_masuk->gelombang->nama;
             })
@@ -69,7 +72,7 @@ class UjianCBTDataTables extends DataTable
                 }
                 return $html;
             })
-            ->rawColumns(['aksi', 'status', 'gelombang', 'jalur', 'nama'])
+            ->rawColumns(['aksi', 'status', 'gelombang', 'jalur', 'nama', 'email'])
             ->setRowId('id');
     }
 
@@ -82,9 +85,11 @@ class UjianCBTDataTables extends DataTable
     {
         // return $model->newQuery();
         return $model->with(['registrasi' => function ($queryRegistrasi) {
-            return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
+            return $queryRegistrasi->with(['users' => function ($queryUsers) {
+                return $queryUsers->select(['id', 'username', 'email']);
+            }, 'jalur_masuk' => function ($queryJalurMasuk) {
                 return $queryJalurMasuk->with(['gelombang', 'jalur']);
-            }]);
+            }])->select(['id', 'pmb_jalur_masuk_id', 'pmb_users_id', 'nama', 'nomor_registrasi', 'jenis_kelamin', 'hp_mahasiswa']);
         }]);
     }
 
@@ -98,6 +103,7 @@ class UjianCBTDataTables extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
+            ->scrollX(true)
             ->selectStyleSingle()
             ->parameters(['autoWidth' => false])
             ->buttons([
@@ -117,6 +123,8 @@ class UjianCBTDataTables extends DataTable
     {
         return [
             Column::computed('nama'),
+            Column::computed("email"),
+            Column::make('registrasi.hp_mahasiswa')->title("Nomor HP"),
             Column::make('nomor_registrasi'),
             Column::computed('gelombang'),
             Column::computed('tahun'),

@@ -20,7 +20,7 @@ class BerkasPernyataanController extends Controller
             return redirect('/user/dashboard')->with("message", "Silahkan melakukan registrasi terlebih dahulu");
         }
 
-        $kelulusan = PMBKelulusanModel::where(['nomor_registrasi' => $dataRegistrasi->nomor_registrasi])->get(['id', 'kode_prodi', "nomor_registrasi"])->first();
+        $kelulusan = PMBKelulusanModel::where(['nomor_registrasi' => $dataRegistrasi->nomor_registrasi])->get(['id', 'status', 'kode_prodi', "nomor_registrasi"])->first();
         // return response()->json($kelulusan);
 
         if ($kelulusan->status != "LULUS") {

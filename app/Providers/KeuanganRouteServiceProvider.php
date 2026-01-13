@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\KeuanganMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,7 @@ class KeuanganRouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web')
+        Route::middleware(['web', KeuanganMiddleware::class])
             ->prefix('keuangan')
             // ->name('pmb.')
             ->group(base_path('routes/keuangan.php'));

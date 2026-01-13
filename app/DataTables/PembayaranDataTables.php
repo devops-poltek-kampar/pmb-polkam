@@ -82,7 +82,7 @@ class PembayaranDataTables extends DataTable
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <p class="modal-title" id="exampleModalLabel">Pembayaran $row->id $row->kategori Nomor Registrasi $row->pmb_registrasi_nomor_registrasi</p>
+                        <p class="modal-title" id="exampleModalLabel">Pembayaran $row->kategori Nomor Registrasi $row->pmb_registrasi_nomor_registrasi</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -127,6 +127,7 @@ class PembayaranDataTables extends DataTable
             ->minifiedAjax()
             ->orderBy(1)
             ->selectStyleSingle()
+            ->scrollX(true)
             ->parameters(['autoWidth' => false])
             ->buttons([
                 Button::make('excel'),
@@ -145,6 +146,7 @@ class PembayaranDataTables extends DataTable
     {
         return [
             Column::make('registrasi.nama')->title("Nama"),
+            Column::make('registrasi.hp_mahasiswa'),
             Column::make("pmb_registrasi_nomor_registrasi")->className('text-start')->title("Nomor Registrasi"),
             Column::computed('gelombang'),
             Column::computed('jalur'),

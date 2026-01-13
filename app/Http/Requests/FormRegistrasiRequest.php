@@ -47,6 +47,7 @@ class FormRegistrasiRequest extends FormRequest
             'prodi_pilihan_1' => ['required', "not_in:Pilih"],
             "prodi_pilihan_2" => ['required', "not_in:Pilih"],
             "pmb_jalur_masuk_id" => ['required', "not_in:Pilih"],
+            "pmb_gelombang_id" => ['required'],
             "kartu_keluarga" => ['required_if:jalur_masuk,5', "mimes:pdf"],
             "surat_keterangan_tidak_mampu" => ['required_if:jalur_masuk,5', "mimes:pdf"],
             // "pembiayaan" => ['required', "not_in:Pilih"],

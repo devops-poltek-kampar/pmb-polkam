@@ -211,6 +211,7 @@ class AuthController extends Controller
     public function auth(Request $request)
     {
         $resultLogin = $this->authService->auth($request->except("_token"));
+        // return response()->json($resultLogin);
         if ($resultLogin['status'] == 200) {
             return redirect($resultLogin['path']);
         }

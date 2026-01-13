@@ -111,6 +111,7 @@ class PindahJalurDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
+            ->scrollX(true)
             ->selectStyleSingle()
             ->parameters(['autoWidth' => false])
             ->addTableClass('table table-bordered table-striped')

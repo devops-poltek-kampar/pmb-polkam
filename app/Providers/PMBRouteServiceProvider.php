@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\PMBMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,7 @@ class PMBRouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web')
+        Route::middleware(['web', PMBMiddleware::class])
             ->prefix('pmb')
             ->name('pmb.')
             ->group(base_path('routes/pmb.php'));

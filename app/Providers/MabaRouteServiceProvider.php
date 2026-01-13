@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\MabaMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,7 @@ class MabaRouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web')
+        Route::middleware(['web', MabaMiddleware::class])
             // ->name('user.')
             ->prefix('user')
             ->group(base_path('routes/user.php'));

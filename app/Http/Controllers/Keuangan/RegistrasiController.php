@@ -100,7 +100,6 @@ class RegistrasiController extends Controller
                 Mail::to($registrasi->users->email)->send(new PembayaranRegistrasiUlangMail($registrasi->nama, $registrasi->nomor_registrasi, now('Asia/Jakarta'), $status));
             }
 
-
             DB::commit();
 
             return redirect('/keuangan/data-pembayaran')

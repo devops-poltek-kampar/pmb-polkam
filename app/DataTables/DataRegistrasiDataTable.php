@@ -88,6 +88,7 @@ class DataRegistrasiDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
+            ->scrollX(true)
             ->parameters(['autoWidth' => false])
             ->selectStyleSingle()
             ->buttons([
@@ -108,6 +109,7 @@ class DataRegistrasiDataTable extends DataTable
         return [
             Column::make("nama")->addClass("text-start"),
             Column::make("nomor_registrasi")->addClass("text-start"),
+            Column::make('hp_mahasiswa')->title("Nomor HP"),
             Column::make("users.email")->addClass("text-start")->title("Email"),
             Column::computed('gelombang'),
             Column::computed('tahun'),

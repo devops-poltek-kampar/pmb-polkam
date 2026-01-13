@@ -8,7 +8,9 @@
                 <h3>Data Registrasi</h3>
             </div>
             <div class="card-body">
+                {{-- <div class="table-wrapper"> --}}
                 {{ $dataTable->table() }}
+                {{-- </div> --}}
             </div>
         </div>
     </div>

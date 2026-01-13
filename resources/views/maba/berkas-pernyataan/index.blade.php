@@ -53,139 +53,11 @@
                                                 @endif
                                             @endforeach
 
-
-
-                                            {{-- <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Perawatan & Perbaikan
-                                                        Mesin</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Teknik Informatika</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Administrasi Bisnis
-                                                        Internasional</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Teknik Pengolahan Kelapa
-                                                        Sawit</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Teknologi Rekayasa
-                                                        Logistik</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Manajemen Agribisnis</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                                                    <span class="fw-semibold">Berkas Pernyataan Pengelolaan
-                                                        Perkebunan</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download me-1"></i> Download
-                                                    </a>
-                                                </td>
-                                            </tr> --}}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
 
-                            {{-- <table class="table table-striped">
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Teknik Pengolahan Sawit</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Perawatan & Perbaikan Mesin</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Teknik Informatika</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Admninistrasi Bisnis Internasional</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Teknik Pengolahan Kelapa Sawit</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Teknologi Rekayasa Logistik</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Manajemen Agribisnis</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Berkas Pernyataan Pengelolaan Perkebunan</strong></td>
-                                    <td><a href="">Download Berkas</a></td>
-                                </tr>
-                            </table> --}}
 
                         </div>
                     </div>
@@ -245,7 +117,7 @@
                         @switch($berkasPernyataan->status)
                             @case('Review')
                                 <div class="alert alert-warning">
-                                    <strong>Terima Kasih Sudah Upload Berkas Pernyataan. Silahkan Menunggu Admin Memverifikasi File
+                                    <strong>Terima Kasih Sudah Upload Berkas Pernyataan. Silahkan Menunggu Verifikasi File
                                         Anda</strong>
                                 </div>
                             @break

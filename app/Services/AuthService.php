@@ -34,13 +34,15 @@ class AuthService
     public function auth($credentials)
     {
         $userResult = $this->authRepository->authLogin($credentials);
+        // return $userResult;
+        // return response()->json($userResult);
         if ($userResult) {
 
             if ($userResult['status'] == "Suspend") {
                 return ['status' => 403, 'path' => '/login', "message" => "Akun belum diaktivasi, silahkan klik link pada email yang sudah dikirimkan"];
             }
 
-            session(["id" => $userResult['id'], 'username' => $userResult['username'], "email" => $userResult['email'], "role_id" => $userResult['role_id']]);
+            session(["id" => $userResult['id'], 'username' => $userResult['username'], "email" => $userResult['email'], "role_id" => $userResult['pmb_role_id']]);
 
             $path = match ($userResult['pmb_role_id']) {
                 2 => "/keuangan/dashboard",

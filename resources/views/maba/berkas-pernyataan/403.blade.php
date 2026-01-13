@@ -75,10 +75,10 @@
                             <i class="bi bi-check-circle text-primary me-2"></i>
                             Pastikan data sesuai dan terbaca jelas
                         </div>
-                        <div class="step-item d-flex align-items-center">
+                        {{-- <div class="step-item d-flex align-items-center">
                             <i class="bi bi-check-circle text-primary me-2"></i>
                             Klik tombol kirim untuk verifikasi
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Action -->

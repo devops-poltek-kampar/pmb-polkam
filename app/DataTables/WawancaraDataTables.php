@@ -30,6 +30,9 @@ class WawancaraDataTables extends DataTable
             ->addColumn("nama", function ($row) {
                 return $row->registrasi->nama;
             })
+            ->addColumn("email", function ($row) {
+                return $row->registrasi->users->email;
+            })
             ->addColumn("gelombang", function ($row) {
                 return $row->registrasi->jalur_masuk->gelombang->nama;
             })
@@ -80,9 +83,11 @@ class WawancaraDataTables extends DataTable
     {
 
         return $model->with(['registrasi' => function ($queryRegistrasi) {
-            return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
+            return $queryRegistrasi->with(['users' => function ($queryUsers) {
+                return $queryUsers->select(['id', 'username', 'email']);
+            }, 'jalur_masuk' => function ($queryJalurMasuk) {
                 return $queryJalurMasuk->with(['jalur', 'gelombang']);
-            }]);
+            }])->select(['id', 'pmb_jalur_masuk_id', 'pmb_users_id', 'nama', 'nomor_registrasi', 'jenis_kelamin', 'hp_mahasiswa']);
         }]);
         // return $model->newQuery();
     }
@@ -98,6 +103,7 @@ class WawancaraDataTables extends DataTable
             ->minifiedAjax()
             ->orderBy(1)
             ->selectStyleSingle()
+            ->scrollX(true)
             ->parameters(['autoWidth' => false])
             ->parameters([
                 'columnDefs' => [
@@ -125,6 +131,7 @@ class WawancaraDataTables extends DataTable
         return [
             Column::computed("nomor")->title("NO"),
             Column::computed('nama'),
+            Column::computed('email'),
             Column::make('nomor_registrasi'),
             Column::computed('gelombang'),
             Column::computed('jalur'),

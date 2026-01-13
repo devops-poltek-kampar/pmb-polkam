@@ -15,6 +15,8 @@ class PMBRegistrasiModel extends Model
     protected $fillable = [
         'id',
         "pmb_users_id",
+        "pmb_gelombang_id",
+        "pmb_jalur_masuk_id",
         "nomor_registrasi",
         "nama",
         "tempat_lahir",
@@ -39,7 +41,7 @@ class PMBRegistrasiModel extends Model
         "sumber_info",
         "prodi_pilihan_1",
         "prodi_pilihan_2",
-        "pmb_jalur_masuk_id",
+
         "pembiayaan",
         "status_bayar_registrasi"
     ];
