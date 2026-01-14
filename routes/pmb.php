@@ -13,6 +13,9 @@ use App\Http\Controllers\PMB\PortalRegistrasiController;
 use App\Http\Controllers\PMB\UjianCBTController;
 use App\Http\Controllers\PMB\WawancaraController;
 use App\Http\Controllers\Web\BeritaController;
+use App\Http\Middleware\PMBMiddleware;
+
+Route::middleware(PMBMiddleware::class);
 
 Route::get('/dashboard', [PMBDashboardController::class, 'dashboard']);
 
