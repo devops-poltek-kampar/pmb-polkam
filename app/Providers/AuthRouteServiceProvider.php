@@ -21,7 +21,7 @@ class AuthRouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware(['web', AuthMiddleware::class])
+        Route::middleware(['web'])
             // ->prefix('user')
             // ->name('auth.')
             ->group(base_path('routes/auth.php'));
