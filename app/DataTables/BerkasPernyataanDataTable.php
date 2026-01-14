@@ -128,6 +128,7 @@ class BerkasPernyataanDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->scrollX(true)
+            ->addTableClass('table table-striped table-hovered table-bordered')
             ->parameters([
                 'autoWidth' => false,
                 // 'dom' => 'Bfrtip',

@@ -2,10 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\Beritum;
-use App\Models\PMBBeritaModel;
+use App\Models\PMBUsersModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -14,37 +13,36 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class BeritaDataTable extends DataTable
+class UsersDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder<Beritum> $query Results from query() method.
+     * @param QueryBuilder<User> $query Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'berita.action')
-            ->addColumn('aksi', function ($row) {
-                $urlEdit = url('/pmb/master-web/berita/edit') . "/" . $row->id;
-                return <<<HTML
-                    <a class="btn btn-sm btn-danger">Delete</a>
-                    <a href="$urlEdit" class="btn btn-sm btn-warning">Edit</a>
+            ->addColumn('action', 'users.action')
+            ->addColumn("status", function ($row) {
+                $badgeDanger = <<<HTML
+                    <span class="badge bg-danger">$row->status</span>
                 HTML;
+                $badgeSuccess = <<<HTML
+                    <span class="badge bg-success">$row->status</span>
+                HTML;
+                return $row->status == "Suspend" ? $badgeDanger : $badgeSuccess;
             })
-            ->addColumn('deskripsi', function ($row) {
-                return Str::words($row->deskripsi, 20);
-            })
-            ->rawColumns(['aksi', 'deskripsi'])
+            ->rawColumns(['status'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      *
-     * @return QueryBuilder<Beritum>
+     * @return QueryBuilder<User>
      */
-    public function query(PMBBeritaModel $model): QueryBuilder
+    public function query(PMBUsersModel $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -55,12 +53,13 @@ class BeritaDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('berita-table')
+            ->setTableId('users-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(1)
+            ->scrollX(true)
             ->addTableClass('table table-striped table-hovered table-bordered')
-            ->parameters(['autoWidth' => false])
+            // ->parameters(['autoWidth' => false])
+            ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -78,19 +77,12 @@ class BeritaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make("subjek"),
-            Column::make('slug'),
-            Column::computed('deskripsi'),
-            Column::computed('aksi')
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
-            // Column::make('id'),
-            // Column::make('add your columns'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+
+            Column::make('username')->title("Username"),
+            Column::make('email')->title("Email"),
+            Column::make('nomor_hp')->title("Nomor HP"),
+            Column::computed("status")->title("Status")
+
         ];
     }
 
@@ -99,6 +91,6 @@ class BeritaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Berita_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

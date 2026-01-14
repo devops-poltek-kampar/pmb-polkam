@@ -14,9 +14,9 @@
         </div>
     </div> --}}
 
-    <div class="row my-4">
 
-        <div class="col-md-4">
+    <div class="row mt-3">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3>Data Jalur
@@ -42,11 +42,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+    </div>
+
+    <div class="row my-4">
+
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3>Tambah Dokumen Jalur
-                    </h3>
+                    <h3>Tambah Dokumen Jalur</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ url('/pmb/portal-registrasi/dokumen-jalur/create') }}" method="POST">
@@ -122,7 +125,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4>Data Dokumen Jalur</h4>
@@ -140,6 +143,7 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Sifat</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
 
@@ -149,10 +153,16 @@
                             @endphp
 
                             @foreach ($jalurMasuk->dokumen as $item)
-                                <tr>
+                                <tr id="row-{{ $item->id }}">
                                     <td>{{ $nomor++ }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->sifat }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            onclick="onDelete('{{ $item->id }}', '{{ $item->nama }}')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -163,6 +173,53 @@
         </div>
 
     </div>
+
+    @push('script')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function onDelete(id, nama) {
+
+                Swal.fire({
+                    title: `Hapus Dokumen ${nama}?`,
+                    showCancelButton: true,
+                    confirmButtonText: "Hapus",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: "DELETE",
+                            url: "{{ url('/pmb/portal-registrasi/dokumen-jalur') }}",
+                            data: {
+                                id: id
+                            },
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.status == 200) {
+
+                                    Swal.fire({
+                                        title: "Sukses!",
+                                        icon: response.message,
+
+                                    });
+
+                                    $(`#row-${id}`).remove();
+                                }
+
+                            }
+                        });
+
+
+
+
+                    }
+                });
+
+            }
+        </script>
+    @endpush
 
     <!--End::row-1 -->
 @endsection

@@ -103,6 +103,7 @@ class UjianCBTDataTables extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
+            ->addTableClass('table table-striped table-hovered table-bordered')
             ->scrollX(true)
             ->selectStyleSingle()
             ->parameters(['autoWidth' => false])

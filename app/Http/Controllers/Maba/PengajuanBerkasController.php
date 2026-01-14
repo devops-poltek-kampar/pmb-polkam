@@ -35,10 +35,20 @@ class PengajuanBerkasController extends Controller
             return redirect('/user/data-registrasi')->with('failed', 'Silahkan menyelesaikan tahap registrasi terlebih dahulu!');
         }
 
-        $pengajuanBerkas = PMBPengajuanBerkasModel::where(['nomor_registrasi' => $dataRegistrasi->nomor_registrasi])->first();
-        $dokumenJalur = PMBDokumenJalurModel::where(['pmb_jalur_masuk_id' => $dataRegistrasi->pmb_jalur_masuk_id])->get();
+        $pengajuanBerkas = PMBPengajuanBerkasModel::with(['registrasi' => function ($queryRegistrasi) {
+            return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
+                return $queryJalurMasuk->with(['gelombang' => function ($queryGelombang) {
+                    return $queryGelombang->select(['id', 'nama', 'tahun']);
+                }, 'jalur' => function ($queryJalur) {
+                    return $queryJalur->select(['id', 'nama']);
+                }])->select(['id', 'pmb_gelombang_id', 'pmb_jalur_id']);
+            }])->select(['id', 'nomor_registrasi', 'pmb_jalur_masuk_id', 'nama']);
+        }, 'berkas' => function ($queryBerkas) {
+            return $queryBerkas->select(['id', 'pmb_pengajuan_berkas_id', 'path', 'kategori', "status", "message"]);
+        }])->where(['nomor_registrasi' => $dataRegistrasi->nomor_registrasi])->lazy()->first();
+        $dokumenJalur = PMBDokumenJalurModel::where(['pmb_jalur_masuk_id' => $dataRegistrasi->pmb_jalur_masuk_id])->lazy();
 
-        // return response()->json($dokumenJalur);
+        // return response()->json($pengajuanBerkas);
 
         return view('maba.pengajuan-berkas.index', compact('dataRegistrasi', 'pengajuanBerkas', 'dokumenJalur'));
     }

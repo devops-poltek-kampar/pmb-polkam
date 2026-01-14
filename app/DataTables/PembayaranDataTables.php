@@ -62,21 +62,22 @@ class PembayaranDataTables extends DataTable
                 return <<<HTML
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#file$row->id">
-                Lihat File
+                <button type="button" title="Lihat File" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#file$row->id">
+                    <i class="bi bi-eye-fill"></i>
                 </button>
 
-                <div class="dropdown">
-                <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    $row->status
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="$urlAksi/Pending/$row->kategori">Pending</a></li>
-                    <li><a class="dropdown-item" href="$urlAksi/Reject/$row->kategori">Reject</a></li>
-                    <li><a class="dropdown-item" href="$urlAksi/Accept/$row->kategori">Accept</a></li>
-                </ul>
-                </div>
+                <a title="Tolak Bukti Pembayaran" href="$urlAksi/Reject/$row->kategori" class="btn btn-danger btn-sm">
+                 <i class="bi bi-x-octagon-fill"></i>
+                </a> 
 
+                <a title="Pending Bukti Pembayaran" class="btn btn-sm btn-warning" href="$urlAksi/Pending/$row->kategori">
+                    <i class="bi bi-hourglass-split"></i>
+                </a>
+
+                <a title="Terima Bukti Pembayaran" class="btn btn-sm btn-success" href="$urlAksi/Accept/$row->kategori">
+                    <i class="bi bi-check-circle-fill"></i>
+                </a>
+    
                 <!-- Modal -->
                 <div class="modal fade" id="file$row->id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -127,6 +128,7 @@ class PembayaranDataTables extends DataTable
             ->minifiedAjax()
             ->orderBy(1)
             ->selectStyleSingle()
+            ->addTableClass('table table-striped table-hovered table-bordered')
             ->scrollX(true)
             ->parameters(['autoWidth' => false])
             ->buttons([

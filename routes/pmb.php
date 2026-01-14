@@ -11,6 +11,7 @@ use App\Http\Controllers\PMB\PengajuanBerkasController;
 use App\Http\Controllers\PMB\PindahJalurController;
 use App\Http\Controllers\PMB\PortalRegistrasiController;
 use App\Http\Controllers\PMB\UjianCBTController;
+use App\Http\Controllers\PMB\UsersController;
 use App\Http\Controllers\PMB\WawancaraController;
 use App\Http\Controllers\Web\BeritaController;
 use App\Http\Middleware\PMBMiddleware;
@@ -53,8 +54,11 @@ Route::post('/portal-registrasi/create', [PortalRegistrasiController::class, "cr
 Route::get('/portal-registrasi/tambah', [PortalRegistrasiController::class, "form_tambah_portal"]);
 Route::get('/portal-registrasi/dokumen-jalur/{jalurMasukId}', [PortalRegistrasiController::class, "dokumen_jalur"]);
 Route::post('/portal-registrasi/dokumen-jalur/create', [PortalRegistrasiController::class, "create_dokumen"]);
+Route::delete('/portal-registrasi/dokumen-jalur', [PortalRegistrasiController::class, "delete_dokumen_jalur"]);
 Route::get('/portal-registrasi/program-studi/{jalurMasukId}', [PortalRegistrasiController::class, "program_studi"]);
 Route::post('/portal-registrasi/program-studi/create', [PortalRegistrasiController::class, "create_prodi_jalur"]);
+
+Route::get('/data-user', [UsersController::class, "index"]);
 
 Route::get('/master-web/berita', [BeritaController::class, "index"]);
 Route::get('/master-web/berita/tambah', [BeritaController::class, "tambah"]);

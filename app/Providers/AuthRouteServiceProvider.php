@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +21,7 @@ class AuthRouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::middleware('web')
+        Route::middleware(['web', AuthMiddleware::class])
             // ->prefix('user')
             // ->name('auth.')
             ->group(base_path('routes/auth.php'));

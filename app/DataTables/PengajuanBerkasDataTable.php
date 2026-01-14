@@ -146,6 +146,7 @@ class PengajuanBerkasDataTable extends DataTable
             ->minifiedAjax()
             ->orderBy(1)
             ->scrollX(true)
+            ->addTableClass('table table-striped table-hovered table-bordered')
             ->parameters(['autoWidth' => false])
             ->selectStyleSingle()
             ->buttons([

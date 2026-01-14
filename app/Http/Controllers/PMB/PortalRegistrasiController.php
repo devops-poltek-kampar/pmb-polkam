@@ -52,8 +52,18 @@ class PortalRegistrasiController extends Controller
         }, 'jalur' => function ($queryJalur) {
             return $queryJalur->select(['id', 'nama']);
         }])->where(['id' => $jalurMasukId])->first();
-        // return response()->json($jalurMasuk);
         return view('pmb.data-master.portal-registrasi.dokumen-jalur', compact('jalurMasuk'));
+    }
+
+    public function delete_dokumen_jalur(Request $request)
+    {
+        $id = $request->input('id');
+        $dokumenJalur = PMBDokumenJalurModel::find($id);
+        if ($dokumenJalur) {
+            $dokumenJalur->delete();
+            return response()->json(['status' => 200, "message" => "Berhasil hapus dokumen!"], 200);
+        }
+        return response()->json(['status' => 404, "message" => "Data tidak ditemukan"], 404);
     }
 
     public function create_dokumen(FormDokumenRequest $request)

@@ -33,7 +33,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row m-0">
             <div class="col-lg-4">
@@ -125,11 +124,5 @@
             </div>
         </div>
     @endif
-
-
-
-
-
-
     <!--End::row-1 -->
 @endsection

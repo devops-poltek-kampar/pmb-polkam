@@ -36,7 +36,20 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($prodi as $item)
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                                    <span class="fw-semibold">Berkas Pernyataan Teknik Pengolahan
+                                                        Sawit</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-download me-1"></i> Download
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            {{-- @foreach ($prodi as $item)
                                                 @if ($kelulusan->kode_prodi == $item->kode_prodi)
                                                     <tr>
                                                         <td>
@@ -51,13 +64,12 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-                                            @endforeach
+                                            @endforeach --}}
 
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
