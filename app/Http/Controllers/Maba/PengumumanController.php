@@ -6,14 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\PMBKelulusanModel;
 use App\Models\PMBRegistrasiModel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PengumumanController extends Controller
 {
     public function index()
     {
 
-        $registrasi = PMBRegistrasiModel::where(['pmb_users_id' => session('id')])->get(['pmb_users_id', 'nama', 'nomor_registrasi', "pmb_jalur_masuk_id"])->first();
-
+        $registrasi = PMBRegistrasiModel::with(['jalur_masuk' => function ($queryJalurMasuk) {
+            return $queryJalurMasuk->with(['jalur' => function ($queryJalur) {
+                return $queryJalur->select(['id', 'nama']);
+            }, 'gelombang' => function ($queryGelombang) {
+                return $queryGelombang->select(['id', 'nama', 'tahun']);
+            }])->select(['id', 'pmb_gelombang_id', 'pmb_jalur_id']);
+        }])->where(['pmb_users_id' => session('id')])->get(['pmb_users_id', 'nama', 'nomor_registrasi', "pmb_jalur_masuk_id"])->first();
+        // return new JsonResource($registrasi);
         if (!$registrasi) {
             return redirect('/user/dashboard')->with("message", 'silahkan melakukan seluruh tahap registrasi terlebih dahulu');
         }
@@ -23,8 +30,6 @@ class PengumumanController extends Controller
             ->where(['nomor_registrasi' => $registrasi->nomor_registrasi])
             ->get(['id', 'nomor_registrasi', 'status', 'status', 'kode_prodi'])
             ->first();
-
-
 
         // return response()->json($kelulusan);
 

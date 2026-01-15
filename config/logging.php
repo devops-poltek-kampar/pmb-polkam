@@ -61,6 +61,7 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            'formatter' => \Monolog\Formatter\JsonFormatter::class,
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],

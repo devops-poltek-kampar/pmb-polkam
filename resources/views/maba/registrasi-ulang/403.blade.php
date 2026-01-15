@@ -54,8 +54,8 @@
 
                     <!-- Description -->
                     <p class="text-muted mb-4">
-                        Untuk melanjutkan ke tahap berikutnya, Anda wajib
-                        <strong>Menyelesaikan tahap registrasi ulang dengan membayar sebesar Rp. 1.000.000</strong>
+                        Untuk melanjutkan ke tahap ini, Anda wajib
+                        <strong>Menyelesaikan tahap pengajuan berkas registrasi</strong>
                         yang telah ditentukan oleh panitia.
                     </p>
 

@@ -82,7 +82,6 @@ class KelulusanDataTable extends DataTable
             ->minifiedAjax()
             ->scrollX(true)
             ->orderBy(1)
-
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),

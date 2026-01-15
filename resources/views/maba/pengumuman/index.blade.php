@@ -41,10 +41,10 @@
             }
 
             /* .status-card {
-                                                                                                                                                                border-radius: 20px;
-                                                                                                                                                                box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
-                                                                                                                                                                animation: fadeInUp .8s ease;
-                                                                                                                                                            } */
+                                                                                                                                                                                                                        border-radius: 20px;
+                                                                                                                                                                                                                        box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
+                                                                                                                                                                                                                        animation: fadeInUp .8s ease;
+                                                                                                                                                                                                                    } */
 
             @keyframes fadeInUp {
                 from {
@@ -220,6 +220,24 @@
                                     <tr>
                                         <th class="text-start">Program Studi</th>
                                         <td class="text-end fw-semibold">{{ $kelulusan->prodi->nama }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-start">Gelombang</th>
+                                        <td class="text-end fw-semibold">{{ $registrasi->jalur_masuk->gelombang->nama }}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-start">Tahun</th>
+                                        <td class="text-end fw-semibold">{{ $registrasi->jalur_masuk->gelombang->tahun }}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-start">Gelombang</th>
+                                        <td class="text-end fw-semibold">{{ $registrasi->jalur_masuk->jalur->nama }}
+                                        </td>
                                     </tr>
                                 </table>
 

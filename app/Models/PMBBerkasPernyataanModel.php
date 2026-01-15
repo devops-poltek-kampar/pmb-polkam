@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PMBBerkasPernyataanModel extends Model
@@ -24,5 +25,10 @@ class PMBBerkasPernyataanModel extends Model
     public function registrasi(): HasOne
     {
         return $this->hasOne(PMBRegistrasiModel::class, 'nomor_registrasi', 'nomor_registrasi');
+    }
+
+    public function file_pernyataan(): HasMany
+    {
+        return $this->hasMany(PMBFileBerkasPernyataanModel::class, 'pmb_berkas_pernyataan_id', 'id');
     }
 }
