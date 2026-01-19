@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pmb_lampiran_registrasi', function (Blueprint $table) {
-            $table->id();
-            $table->string("pmb_registrsi_id");
-            $table->string("nama");
-            $table->string("path");
-            $table->enum("status", ["Accept", "Reject", "Review"]);
+        Schema::create('pmb_kelulusan', function (Blueprint $table) {
+            $table->string('id', 50)->primary();
+            $table->string("pmb_jalur_masuk_id", 50);
+            $table->string("master_program_studi_id", 50);
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pmb_lampiran_registrasi');
+        Schema::dropIfExists('pmb_kelulusan');
     }
 };

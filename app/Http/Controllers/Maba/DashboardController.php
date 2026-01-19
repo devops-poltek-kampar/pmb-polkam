@@ -16,8 +16,6 @@ class DashboardController extends Controller
                 $queryJalur->select(['id', 'nama']);
             }])->select(['id', 'pmb_gelombang_id', 'pmb_jalur_id', 'biaya_registrasi', 'keterangan']);
         }])->where(['status' => 'Open'])->select(['id', 'nama', 'tahun', 'open', 'close'])->first();
-        // return response()->json(compact('gelombang'));
-        // $gelombang = PMBGelombangModel::with(['jalur_masuk:id,'])
         $registrasi = PMBRegistrasiModel::where(['pmb_users_id' => session('id')])->get(['id', 'pmb_users_id', 'created_at'])->first();
 
         return view('maba.dashboard', compact('gelombang', 'registrasi'));

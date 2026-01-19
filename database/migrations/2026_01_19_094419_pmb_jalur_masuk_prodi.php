@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pmb_berita', function (Blueprint $table) {
+        Schema::create('pmb_jalur_masuk_prodi', function (Blueprint $table) {
             $table->string('id', 50)->primary();
-            $table->text("subjek");
-            $table->text('slug');
-            $table->longText('deskripsi');
-            $table->string('thumbnail', 255);
+            $table->string("pmb_jalur_masuk_id", 50);
+            $table->string("master_program_studi_id", 50);
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pmb_berita');
+        Schema::dropIfExists('pmb_jalur_masuk_prodi');
     }
 };
