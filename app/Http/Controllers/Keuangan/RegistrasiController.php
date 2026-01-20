@@ -28,11 +28,17 @@ class RegistrasiController extends Controller
     public function data_pembayaran(PembayaranDataTables $dataTable)
     {
 
-        // $dataPembayaran = PMBBuktiPembayaranModel::with(['registrasi' => function ($queryRegistrasi) {
+        // $model = new PMBBuktiPembayaranModel();
+
+        // $dataPembayaran = $model->newQuery()->with(['registrasi' => function ($queryRegistrasi) {
         //     return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
-        //         return $queryJalurMasuk->with(['jalur', 'gelombang']);
-        //     }]);
-        // }])->get();
+        //         return $queryJalurMasuk->with(['gelombang' => function ($queryGelombang) {
+        //             return $queryGelombang->select(['id', 'nama', 'tahun']);
+        //         }, 'jalur' => function ($queryJalur) {
+        //             return $queryJalur->select(['id', 'nama']);
+        //         }]);
+        //     }])->select(['id', 'nama', 'pmb_users_id', "nomor_registrasi", "pmb_jalur_masuk_id", 'hp_mahasiswa']);
+        // }])->get(['id', 'pmb_registrasi_nomor_registrasi', 'path', 'status', 'kategori']);
         // return response()->json($dataPembayaran);
         return $dataTable->render("keuangan.pembayaran-pmb");
         // $dataRegistrasi = $this->registrasiService->getRegistrasiWithStructRegis();

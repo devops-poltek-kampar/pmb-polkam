@@ -110,11 +110,20 @@ class PembayaranDataTables extends DataTable
      */
     public function query(PMBBuktiPembayaranModel $model): QueryBuilder
     {
-        return $model->with(['registrasi' => function ($queryRegistrasi) {
+        return $model->newQuery()->with(['registrasi' => function ($queryRegistrasi) {
             return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
-                return $queryJalurMasuk->with(['gelombang']);
-            }]);
+                return $queryJalurMasuk->with(['gelombang' => function ($queryGelombang) {
+                    return $queryGelombang->select(['id', 'nama', 'tahun']);
+                }, 'jalur' => function ($queryJalur) {
+                    return $queryJalur->select(['id', 'nama']);
+                }]);
+            }])->select(['id', 'nama', 'pmb_users_id', "nomor_registrasi", "pmb_jalur_masuk_id", 'hp_mahasiswa']);
         }]);
+        // return $model->with(['registrasi' => function ($queryRegistrasi) {
+        //     return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
+        //         return $queryJalurMasuk->with(['gelombang']);
+        //     }]);
+        // }]);
     }
 
     /**
@@ -148,7 +157,7 @@ class PembayaranDataTables extends DataTable
     {
         return [
             Column::make('registrasi.nama')->title("Nama"),
-            Column::make('registrasi.hp_mahasiswa'),
+            Column::make('registrasi.hp_mahasiswa')->title("Nomor HP"),
             Column::make("pmb_registrasi_nomor_registrasi")->className('text-start')->title("Nomor Registrasi"),
             Column::computed('gelombang'),
             Column::computed('jalur'),
