@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pmb_berita', function (Blueprint $table) {
+        Schema::create('pmb_wawancara', function (Blueprint $table) {
             $table->string('id', 50)->primary();
-            $table->text("subjek");
-            $table->text('slug');
-            $table->longText('deskripsi');
-            $table->string('thumbnail', 255);
-            $table->timestamps();
+            $table->string("nomor_registrasi");
+            $table->enum("status", ["Menunggu", 'Lulus', "Tidak Lulus"]);
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pmb_berita');
+        Schema::dropIfExists('pmb_wawancara');
     }
 };

@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string("prodi_pilihan_1");
             $table->string("prodi_pilihan_2");
             $table->string("sumber_info_daftar");
+            $table->string('sumber_info')->nullable();
             $table->enum("jalur_masuk", ['Reguler', "Prestasi Akademik", "Prestasi Non Akademik", "RPL"]);
             $table->enum("pembiayaan", ["Mandiri", "BPDP-KS", "Beasiswa KIP"]);
             $table->enum("status_bayar_registrasi", ["Pending", "Done"]);

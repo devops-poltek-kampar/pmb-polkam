@@ -9,6 +9,7 @@ use App\Http\Controllers\PMB\JalurController;
 use App\Http\Controllers\PMB\LulusSeleksiController;
 use App\Http\Controllers\PMB\PengajuanBerkasController;
 use App\Http\Controllers\PMB\PindahJalurController;
+use App\Http\Controllers\PMB\PindahProdiController;
 use App\Http\Controllers\PMB\PortalRegistrasiController;
 use App\Http\Controllers\PMB\UjianCBTController;
 use App\Http\Controllers\PMB\UsersController;
@@ -29,6 +30,8 @@ Route::get('/ujian-cbt/lulus/{ujianCbtId}', [UjianCBTController::class, "lulus"]
 
 Route::get('/pindah-jalur', [PindahJalurController::class, "index"]);
 Route::post('/pindah-jalur', [PindahJalurController::class, "pindah_jalur"]);
+
+Route::get('/pindah-prodi', [PindahProdiController::class, "index"]);
 
 Route::get('/wawancara', [WawancaraController::class, 'index']);
 Route::get('/wawancara/lulus/{wawancaraId}', [WawancaraController::class, "lulus"]);

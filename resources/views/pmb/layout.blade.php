@@ -356,7 +356,7 @@
 
                         <!-- Start::slide -->
                         <li class="slide">
-                            <a href="{{ url('/pmb/dashboard') }}" class="side-menu__item">
+                            <a href="{{ url('/pmb/pindah-prodi') }}" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
                                     enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="25px"
                                     height="25px">

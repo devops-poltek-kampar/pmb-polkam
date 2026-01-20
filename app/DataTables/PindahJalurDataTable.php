@@ -97,8 +97,8 @@ class PindahJalurDataTable extends DataTable
     public function query(PMBRegistrasiModel $model): QueryBuilder
     {
         return $model->with(['jalur_masuk' => function ($queryJalurMasuk) {
-            return $queryJalurMasuk->with(['jalur', 'gelombang',]);
-        }, 'prodi_pilihan_1', 'prodi_pilihan_2'])->select(['id', 'nama', 'nomor_registrasi', "pmb_jalur_masuk_id", "prodi_pilihan_1", 'prodi_pilihan_2']);
+            return $queryJalurMasuk->with(['jalur', 'gelombang']);
+        }, 'prodi_1', 'prodi_2'])->select(['id', 'nama', 'nomor_registrasi', "pmb_jalur_masuk_id", "prodi_pilihan_1", 'prodi_pilihan_2']);
     }
 
     /**
@@ -137,8 +137,8 @@ class PindahJalurDataTable extends DataTable
             Column::computed("gelombang"),
             Column::computed('tahun'),
             Column::computed("jalur"),
-            Column::make('prodi_pilihan_1.nama')->title("Prodi 1"),
-            Column::make('prodi_pilihan_2.nama')->title("Prodi 2"),
+            Column::make('prodi_1.nama')->title("Prodi 1"),
+            Column::make('prodi_2.nama')->title("Prodi 2"),
             Column::computed('aksi')
         ];
     }
