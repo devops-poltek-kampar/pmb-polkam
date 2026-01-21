@@ -32,6 +32,7 @@ Route::get('/pindah-jalur', [PindahJalurController::class, "index"]);
 Route::post('/pindah-jalur', [PindahJalurController::class, "pindah_jalur"]);
 
 Route::get('/pindah-prodi', [PindahProdiController::class, "index"]);
+Route::post('/pindah-prodi', [PindahProdiController::class, "pindah_prodi"]);
 
 Route::get('/wawancara', [WawancaraController::class, 'index']);
 Route::get('/wawancara/lulus/{wawancaraId}', [WawancaraController::class, "lulus"]);

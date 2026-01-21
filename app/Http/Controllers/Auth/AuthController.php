@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Socialite;
@@ -78,10 +79,15 @@ class AuthController extends Controller
 
             $email = $request->post('email');
             // $user = PMBUsersModel::where(['email' => $email])->get(['email', 'username', 'id'])->first();
-            $user = PMBUsersModel::whereEmail($email)->get(['id', 'username', 'email'])->first();
+            $user = PMBUsersModel::whereEmail($email)->get(['id', 'username', 'email', 'google_id'])->first();
+            // return response()->json($user);
             if (!$user) {
                 return back()->with("message", "Email tidak terdaftar!");
             }
+            if ($user->google_id != null) {
+                return redirect('/auth/forgot-password')->with('failed', "Maaf email tidak terdaftar!");
+            }
+
             $token = random_int(100000, 999999);
             $forgotPassword = PMBForgotPasswordModel::create([
                 'id' => strtoupper(Str::random(20)),
@@ -96,7 +102,9 @@ class AuthController extends Controller
                     return redirect('/auth/forgot-password')->with('failed', "Gagal kirim email");
                 }
                 DB::commit();
-                return redirect('/auth/forgot-password/token')->with('message', "Token sudah dikirim ke $user->email");
+                session()->flash('message', "Token sudah dikirim ke $user->email");
+                return view('auth.form-token');
+                // return redirect('/auth/forgot-password/token')->with('message', "Token sudah dikirim ke $user->email");
             }
         } catch (Exception $ex) {
             DB::rollBack();
@@ -124,7 +132,6 @@ class AuthController extends Controller
 
     public function reset_password(Request $request)
     {
-
         $dataValid = $request->validate([
             'email' => ['required'],
             'password' => ['required', 'confirmed']
@@ -147,6 +154,7 @@ class AuthController extends Controller
 
     public function google_auth_callback()
     {
+
         $googleUser = Socialite::driver('google')->user();
 
         $userByGoogleId = PMBUsersModel::where(['google_id' => $googleUser->getId(), 'email' => $googleUser->getEmail()])->first();
@@ -192,20 +200,28 @@ class AuthController extends Controller
 
     public function register(RegistrasiRequest $request)
     {
-        $dataRegistrasi = $request->validated();
-        $dataRegistrasi['password'] = bcrypt($dataRegistrasi['password']);
-        $dataRegistrasi['status'] = "Suspend";
-        $dataRegistrasi['pmb_role_id'] = 3;
-        $dataRegistrasi['pmb_users_id'] = session('id');
-        $dataRegistrasi['id'] = strtoupper(Str::random(20));
+        try {
+            $dataRegistrasi = $request->validated();
+            $dataRegistrasi['password'] = bcrypt($dataRegistrasi['password']);
+            $dataRegistrasi['status'] = "Suspend";
+            $dataRegistrasi['pmb_role_id'] = 3;
+            $dataRegistrasi['pmb_users_id'] = session('id');
+            $dataRegistrasi['id'] = strtoupper(Str::random(20));
 
-        $resultRegistrasi  = $this->authService->register($dataRegistrasi);
+            $resultRegistrasi  = $this->authService->register($dataRegistrasi);
 
-        if ($resultRegistrasi['status'] == 201) {
-            return redirect('/login')->with("message", $resultRegistrasi['message']);
+            if ($resultRegistrasi['status'] == 201) {
+                return redirect('/login')->with("message", $resultRegistrasi['message']);
+            }
+
+            return back()->with("error-message", $resultRegistrasi['error-message']);
+        } catch (Exception $ex) {
+            Log::channel('authentication')->error('registrasi error!', [
+                'message' => $ex->getMessage(),
+                'waktu' => Carbon::now()->translatedFormat("l, j F Y H:i")
+            ]);
+            abort(500);
         }
-
-        return back()->with("error-message", $resultRegistrasi['error-message']);
     }
 
     public function auth(Request $request)

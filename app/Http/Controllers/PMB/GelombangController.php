@@ -12,7 +12,7 @@ class GelombangController extends Controller
 {
     public function gelombang()
     {
-        $dataGelombang = PMBGelombangModel::all();
+        $dataGelombang = PMBGelombangModel::lazy();
         return view('pmb.data-master.gelombang.index', compact("dataGelombang"));
     }
 

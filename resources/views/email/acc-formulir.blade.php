@@ -70,7 +70,8 @@
                                 </tr>
                                 <tr>
                                     <td>Tanggal Verifikasi</td>
-                                    <td><strong>{{ now() }}</strong></td>
+                                    <td><strong>{{ \Carbon\Carbon::now()->translateFormat('l, j F Y H:i') }}</strong>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>

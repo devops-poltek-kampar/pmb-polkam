@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/google', [AuthController::class, "google_auth"]);
 Route::get('/auth/google/callback', [AuthController::class, "google_auth_callback"]);
 Route::get('/auth/forgot-password', [AuthController::class, "forgot_password"]);
-Route::post('/auth/forgot-password/send-email', [AuthController::class, 'send_email']);
+Route::post('/auth/forgot-password', [AuthController::class, 'send_email']);
 Route::get("/registrasi", [AuthController::class, "registrasi"]);
 Route::get('/login', [AuthController::class, "login"]);
 Route::get('/logout', [AuthController::class, "logout"]);

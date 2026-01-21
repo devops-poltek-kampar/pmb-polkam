@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\PMBUsersModel;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -32,6 +33,9 @@ class UsersDataTable extends DataTable
                     <span class="badge bg-success">$row->status</span>
                 HTML;
                 return $row->status == "Suspend" ? $badgeDanger : $badgeSuccess;
+            })
+            ->addColumn("tanggal_register", function ($row) {
+                return Carbon::parse($row->created_at)->translatedFormat('l, j F Y H:i');
             })
             ->rawColumns(['status'])
             ->setRowId('id');
@@ -81,7 +85,9 @@ class UsersDataTable extends DataTable
             Column::make('username')->title("Username"),
             Column::make('email')->title("Email"),
             Column::make('nomor_hp')->title("Nomor HP"),
-            Column::computed("status")->title("Status")
+            Column::computed('tanggal_register')->title("Registrasi"),
+            Column::computed("status")->title("Status"),
+
 
         ];
     }

@@ -13,7 +13,7 @@ class JalurController extends Controller
     public function jalur()
     {
         // $dataJalur = $this->systemSettingService->getJalur();
-        $dataJalur = PMBJalurModel::all();
+        $dataJalur = PMBJalurModel::lazy();
         return view('pmb.data-master.jalur.index', compact('dataJalur'));
     }
 

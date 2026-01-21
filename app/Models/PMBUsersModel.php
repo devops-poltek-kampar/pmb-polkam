@@ -20,7 +20,15 @@ class PMBUsersModel extends Authenticatable
         "pmb_role_id",
         "username",
         "email",
+        "status",
         "nomor_hp",
         "password",
+        'foto_profile'
+    ];
+
+    protected $hidden = [
+        "password",
+        'created_at',
+        'updated_at'
     ];
 }

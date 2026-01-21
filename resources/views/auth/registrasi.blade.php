@@ -56,7 +56,7 @@
                 </div>
                 <div class="card custom-card">
                     <div class="card-body p-4 pb-3">
-                        <h4 class="fw-semibold mb-4 text-center">Registrasi</h4>
+                        <h4 class="fw-semibold mb-4 text-center">Registrasi Akun</h4>
                         <form action="{{ route('auth.register') }}" method="POST">
                             @csrf
                             <div class="input-box mb-3" data-bs-validate="Valid email is required: ex@abc.xyz">
@@ -73,6 +73,7 @@
                             </div>
 
                             <div class="input-box mb-3" data-bs-validate="Valid email is required: ex@abc.xyz">
+
                                 <input type="text" name="email" value="{{ old('email') }}"
                                     class="form-control form-control-lg @error('email')
                                     is-invalid

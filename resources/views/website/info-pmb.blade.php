@@ -32,7 +32,6 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <h4 class="fw-bold text-success mb-3">🎓 Program Studi</h4>
-
                 <div class="row row-cols-1 row-cols-md-2 g-3">
                     <div class="col">• D2 Teknik Pengolahan Kelapa Sawit</div>
                     <div class="col">• D3 Teknik Pengolahan Sawit</div>
@@ -47,7 +46,7 @@
         </div>
 
         <!-- C. JALUR PENDAFTARAN -->
-        <div class="card border-0 shadow-sm mb-4">
+        {{-- <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <h4 class="fw-bold text-success mb-3">🛣️ Jalur Pendaftaran</h4>
 
@@ -97,7 +96,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- D. BIAYA MASUK -->
         <div class="card border-0 shadow-sm mb-4">
@@ -162,28 +161,40 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <h4 class="fw-bold text-success mb-3">📚 Uang Kuliah (SPP / Semester)</h4>
-
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td>D2 Teknik Pengolahan Kelapa Sawit</td>
+                                <td>DII Teknik Pengolahan Kelapa Sawit</td>
                                 <td>Rp 2.400.000</td>
                             </tr>
                             <tr>
-                                <td>D3 Teknik Pengolahan Sawit</td>
+                                <td>DIII Teknik Pengolahan Sawit</td>
                                 <td>Rp 4.200.000</td>
                             </tr>
                             <tr>
-                                <td>D3 Perawatan dan Perbaikan Mesin</td>
+                                <td>DIII Perawatan dan Perbaikan Mesin</td>
                                 <td>Rp 3.000.000</td>
                             </tr>
                             <tr>
-                                <td>D3 Teknik Informatika</td>
+                                <td>DIII Teknik Informatika</td>
                                 <td>Rp 3.000.000</td>
                             </tr>
                             <tr>
-                                <td>D4 (Semua Prodi)</td>
+                                <td>DIV Administrasi Bisnis Internasional</td>
+                                <td>Rp 3.600.000</td>
+                            </tr>
+
+                            <tr>
+                                <td>DIV Manajemen Agribisnis</td>
+                                <td>Rp 3.600.000</td>
+                            </tr>
+                            <tr>
+                                <td>DIV Pengelolaan Perkebunan</td>
+                                <td>Rp 3.600.000</td>
+                            </tr>
+                            <tr>
+                                <td>DIV Teknologi Rekayasa Logistik</td>
                                 <td>Rp 3.600.000</td>
                             </tr>
                         </tbody>
@@ -194,15 +205,12 @@
 
         <!-- CTA -->
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-primary btn-lg px-5">
+            <a href="{{ url('/registrasi') }}" class="btn btn-primary btn-lg px-5">
                 Daftar Sekarang
             </a>
         </div>
 
     </div>
-
-
-
 
 
 

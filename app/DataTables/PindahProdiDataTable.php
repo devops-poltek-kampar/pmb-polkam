@@ -24,14 +24,10 @@ class PindahProdiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
 
-        $prodi = MasterProgramStudiModel::lazy();
+        // $prodi = MasterProgramStudiModel::lazy();
         return (new EloquentDataTable($query))
             ->addColumn('action', 'pindahprodi.action')
-            ->addColumn("aksi", function ($row) use ($prodi) {
-                $html = "";
-                foreach ($prodi as $key => $value) {
-                    $html .= "<option>" . $value->nama . "</option>";
-                }
+            ->addColumn("aksi", function ($row) {
                 $data = json_encode($row);
                 return <<<HTML
                     <button type="button" onclick='openModal($data)' class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modal-ganti-prodi" title="Pindah program studi"><i class="bi bi-arrow-left-right"></i></button>
@@ -57,7 +53,13 @@ class PindahProdiDataTable extends DataTable
         return $model->newQuery()->with(['prodi' => function ($queryProdi) {
             return $queryProdi->select(['kode_prodi', "nama"]);
         }, 'registrasi' => function ($queryRegistrasi) {
-            return $queryRegistrasi->select(['id', 'nomor_registrasi', "pmb_jalur_masuk_id", "nama", "hp_mahasiswa"]);
+            return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
+                return $queryJalurMasuk->with(['jalur' => function ($queryJalur) {
+                    return $queryJalur->select(['id', 'nama']);
+                }, 'gelombang' => function ($queryGelombang) {
+                    return $queryGelombang->select(['id', 'nama', 'tahun']);
+                }]);
+            }])->select(['id', 'nomor_registrasi', "pmb_jalur_masuk_id", "nama", "hp_mahasiswa"]);
         }]);
         // return $model->with(['prodi', 'registrasi' => function ($queryRegistrasi) {
         //     return $queryRegistrasi->select(['id', 'nomor_registrasi', "pmb_jalur_masuk_id", "nama", "hp_mahasiswa"]);
@@ -73,8 +75,8 @@ class PindahProdiDataTable extends DataTable
             ->setTableId('pindahprodi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addTableClass('table table-bordered border-primary table-success table-hover')
             ->orderBy(1)
-            // ->addTableClass('table table-striped table-bordered table-hovered')
             ->parameters(['autoSize' => false])
             ->selectStyleSingle()
             ->buttons([
@@ -93,13 +95,14 @@ class PindahProdiDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-
             Column::make('nomor_registrasi')->addClass('text-start'),
             Column::computed('nama'),
-            Column::make('prodi.nama')->title("Nama"),
-            Column::computed('hp'),
+            Column::make('prodi.nama')->title("Prodi"),
+            Column::computed('hp')->addClass('text-start'),
+            Column::make('registrasi.jalur_masuk.gelombang.nama')->title("Gelombang"),
+            Column::make('registrasi.jalur_masuk.gelombang.tahun')->title("Tahun"),
+            Column::make('registrasi.jalur_masuk.jalur.nama')->title("Jalur"),
             Column::computed('aksi'),
-
         ];
     }
 

@@ -78,14 +78,14 @@
             <div class="container d-flex justify-content-center position-relative">
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="{{ url('/') }}" class="text-white">Beranda</a></li>
-                        <li><a href="{{ url('/profile') }}" class="text-white">Profil</a></li>
-                        <li><a href="{{ url('/info-pmb') }}" class="text-white">Info PMB</a></li>
-                        <li><a href="{{ url('/berita') }}" class="text-white">Berita</a></li>
-                        <li><a href="{{ url('/jadwal-biaya') }}" class="text-white">Jadwal & Biaya</a></li>
-                        <li><a href="{{ url('/galeri') }}" class="text-white disabled">Galeri</a></li>
-                        <li><a href="{{ url('/unduh-berkas') }}" class="text-white">Unduh Berkas</a></li>
-                        <li><a href="{{ url('/login') }}" class="text-white">Login</a></li>
+                        <li><a href="{{ url('/') }}" class="">Beranda</a></li>
+                        <li><a href="{{ url('/profile') }}" class="">Profil</a></li>
+                        <li><a href="{{ url('/info-pmb') }}" class="">Info PMB</a></li>
+                        <li><a href="{{ url('/berita') }}" class="">Berita</a></li>
+                        <li><a href="{{ url('/jadwal-biaya') }}" class="">Jadwal & Biaya</a></li>
+                        <li><a href="{{ url('/galeri') }}" class="">Galeri</a></li>
+                        <li><a href="{{ url('/unduh-berkas') }}" class="">Unduh Berkas</a></li>
+                        <li><a href="{{ url('/login') }}" class="">Login</a></li>
                         {{-- <li><a href="#portfolio">Portfolio</a></li> --}}
                         {{-- <li><a href="#team">Team</a></li> --}}
                         {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
@@ -118,8 +118,6 @@
 
     <main class="main">
 
-
-
         @yield('content')
 
     </main>
@@ -140,7 +138,7 @@
                         <div class="social-links mt-4">
                             <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                             <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" aria-label="Tiktok"><i class="bi bi-tiktok"></i></a>
                             <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
                             <a href="#" aria-label="Dribbble"><i class="bi bi-dribbble"></i></a>
                         </div>
@@ -184,7 +182,7 @@
                 <div class="col-lg-2">
                     <div class="footer-cta">
                         <h5>Let's Connect</h5>
-                        <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+                        <a href="#" class="btn btn-outline">Telusuri</a>
                     </div>
                 </div>
 

@@ -65,17 +65,20 @@
 
                     <!-- Alert (optional) -->
 
-                    @if (session('failed'))
-                        <div class="alert alert-danger">
-                            {{ session('failed') }}
-                        </div>
-                    @endif
+
                     {{--  --}}
 
 
                     <!-- Form -->
-                    <form method="POST" action="{{ url('/auth/forgot-password/send-email') }}">
+                    <form method="POST" action="{{ url('/auth/forgot-password') }}">
+                        {{-- <form method="POST" action="{{ url('/auth/forgot-password/send-email') }}"> --}}
                         @csrf
+
+                        @if (session('failed'))
+                            <div class="alert alert-danger">
+                                {{ session('failed') }}
+                            </div>
+                        @endif
 
                         <div class="mb-4 text-start">
                             <label class="form-label fw-semibold">Alamat Email</label>
