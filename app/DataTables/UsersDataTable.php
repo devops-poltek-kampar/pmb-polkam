@@ -35,7 +35,7 @@ class UsersDataTable extends DataTable
                 return $row->status == "Suspend" ? $badgeDanger : $badgeSuccess;
             })
             ->addColumn("tanggal_register", function ($row) {
-                return Carbon::parse($row->created_at)->translatedFormat('l, j F Y H:i');
+                return Carbon::parse($row->created_at)->locale('id')->translatedFormat('l, j F Y H:i');
             })
             ->rawColumns(['status'])
             ->setRowId('id');
@@ -81,14 +81,11 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-
             Column::make('username')->title("Username"),
             Column::make('email')->title("Email"),
             Column::make('nomor_hp')->title("Nomor HP"),
             Column::computed('tanggal_register')->title("Registrasi"),
             Column::computed("status")->title("Status"),
-
-
         ];
     }
 

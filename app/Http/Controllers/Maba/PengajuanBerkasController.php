@@ -48,8 +48,6 @@ class PengajuanBerkasController extends Controller
         }])->where(['nomor_registrasi' => $dataRegistrasi->nomor_registrasi])->lazy()->first();
         $dokumenJalur = PMBDokumenJalurModel::where(['pmb_jalur_masuk_id' => $dataRegistrasi->pmb_jalur_masuk_id])->lazy();
 
-        // return response()->json($pengajuanBerkas);
-
         return view('maba.pengajuan-berkas.index', compact('dataRegistrasi', 'pengajuanBerkas', 'dokumenJalur'));
     }
 
