@@ -70,7 +70,7 @@
                                 </tr>
                                 <tr>
                                     <td>Tanggal Verifikasi</td>
-                                    <td><strong>{{ \Carbon\Carbon::now()->translateFormat('l, j F Y H:i') }}</strong>
+                                    <td><strong>{{ \Carbon\Carbon::now()->translatedFormat('l, j F Y H:i') }}</strong>
                                     </td>
                                 </tr>
                                 <tr>

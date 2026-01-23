@@ -94,7 +94,7 @@ class CalonMahasiswaController extends Controller
                 "message" => $exception->getMessage(),
                 'trace' => $exception->getTraceAsString()
             ]);
-            throw new Exception("Error Processing Request", 1);
+            throw new Exception($exception->getMessage(), 1);
         }
     }
 }
