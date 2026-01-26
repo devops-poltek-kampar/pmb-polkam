@@ -9,6 +9,13 @@
                 </div>
 
                 <div class="card-body">
+
+                    @if (session('info'))
+                        <div class="alert alert-info">
+                            {{ session('info') }}
+                        </div>
+                    @endif
+
                     {{ $dataTable->table() }}
                 </div>
             </div>

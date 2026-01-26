@@ -8,6 +8,12 @@
                 <h3>Data Registrasi</h3>
             </div>
             <div class="card-body">
+
+                @if (session('info'))
+                    <div class="alert alert-info">
+                        {{ session('info') }}
+                    </div>
+                @endif
                 {{-- <div class="table-wrapper"> --}}
                 {{ $dataTable->table() }}
                 {{-- </div> --}}

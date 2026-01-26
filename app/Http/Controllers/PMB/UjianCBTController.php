@@ -44,7 +44,7 @@ class UjianCBTController extends Controller
                     "status" => "Menunggu"
                 ]);
 
-                return redirect('/pmb/wawancara')->with('message', "Berhasil lulus ujian CBT $ujianCBT->nomor_registrasi!");
+                return redirect('/pmb/ujian-cbt')->with('message', "Berhasil lulus ujian CBT $ujianCBT->nomor_registrasi!");
             }
         }
 

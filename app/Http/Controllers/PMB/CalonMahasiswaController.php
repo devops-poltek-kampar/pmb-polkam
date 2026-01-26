@@ -61,16 +61,20 @@ class CalonMahasiswaController extends Controller
             // $resultUpdate = PMBRegistrasiModel::where(['nomor_registrasi' => $nomorRegistrasi])->update(['status_registrasi' => "Approve"]);
             $registrasi = PMBRegistrasiModel::with(['users' => function ($queryUsers) {
                 return $queryUsers->select(['id', 'username', 'email', 'nomor_hp']);
-            }])->where(['nomor_registrasi' => $nomorRegistrasi])->get(['id', 'nomor_registrasi', 'nama', 'pmb_users_id', 'status_bayar_registrasi'])->first();
+            }])->where(['nomor_registrasi' => $nomorRegistrasi])->get(['id', 'nomor_registrasi', 'nama', 'pmb_users_id', 'status_bayar_registrasi', 'status_registrasi'])->first();
             if ($registrasi) {
+
+                // return response()->json($registrasi);
 
                 if ($registrasi->status_bayar_registrasi != "Done") {
                     return redirect("/pmb/calon-mahasiswa/detail-registrasi/" . $registrasi->id)->with('info', "Pembayaran registrasi belum diselesaikan!");
                 }
 
                 if ($registrasi->status_registrasi == "Approve") {
-                    return back()->with("message", "Sudah diverifikasi");
+                    return redirect('/pmb/calon-mahasiswa')->with("info", "Sudah diverifikasi");
                 }
+
+                // return response()->json($registrasi);
 
                 $registrasi->status_registrasi = "Approve";
                 if ($registrasi->save()) {
