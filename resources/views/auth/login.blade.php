@@ -42,7 +42,6 @@
 
 <body id="body">
 
-
     <div class="container px-3">
         <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
@@ -109,14 +108,13 @@
         </div>
     </div>
 
-
     <!-- Bootstrap JS -->
-    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="../assets/js/custom-switcher.min.js"></script>
+    {{-- <script src="{{ asset('/assets/js/custom-switcher.min.js') }}"></script> --}}
 
     <!-- Show Password JS -->
-    <script src="../assets/js/show-password.js"></script>
+    <script src="{{ asset('/assets/js/show-password.js') }}"></script>
 
 </body>
 
