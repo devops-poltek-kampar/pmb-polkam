@@ -23,10 +23,9 @@ class WawancaraDataTables extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', 'wawancaradatatables.action')
-            ->addColumn('nomor', function ($row) {
-                return 1;
-            })
+
             ->addColumn("nama", function ($row) {
                 return $row->registrasi->nama;
             })
@@ -87,8 +86,8 @@ class WawancaraDataTables extends DataTable
                 return $queryUsers->select(['id', 'username', 'email']);
             }, 'jalur_masuk' => function ($queryJalurMasuk) {
                 return $queryJalurMasuk->with(['jalur', 'gelombang']);
-            }])->select(['id', 'pmb_jalur_masuk_id', 'pmb_users_id', 'nama', 'nomor_registrasi', 'jenis_kelamin', 'hp_mahasiswa']);
-        }]);
+            }])->select(['id', 'pmb_jalur_masuk_id', 'pmb_users_id', 'nama', 'nomor_registrasi', 'created_at', 'jenis_kelamin', 'hp_mahasiswa']);
+        }])->orderBy('created_at', 'DESC');
         // return $model->newQuery();
     }
 
@@ -130,7 +129,12 @@ class WawancaraDataTables extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed("nomor")->title("NO"),
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::computed('nama'),
             Column::computed('email'),
             Column::make('nomor_registrasi'),

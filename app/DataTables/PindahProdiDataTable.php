@@ -39,6 +39,7 @@ class PindahProdiDataTable extends DataTable
             ->addColumn("hp", function ($row) {
                 return $row->registrasi->hp_mahasiswa;
             })
+            ->addIndexColumn()
             ->rawColumns(['aksi'])
             ->setRowId('id');
     }
@@ -95,6 +96,12 @@ class PindahProdiDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('nomor_registrasi')->addClass('text-start'),
             Column::computed('nama'),
             Column::make('prodi.nama')->title("Prodi"),

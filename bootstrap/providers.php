@@ -6,4 +6,5 @@ return [
     App\Providers\KeuanganRouteServiceProvider::class,
     App\Providers\MabaRouteServiceProvider::class,
     App\Providers\PMBRouteServiceProvider::class,
+    App\Providers\TelescopeServiceProvider::class,
 ];

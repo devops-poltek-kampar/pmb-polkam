@@ -23,6 +23,7 @@ class BerkasPernyataanDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', 'berkaspernyataan.action')
             ->addColumn('status', function ($row) {
                 switch ($row->status) {
@@ -152,6 +153,12 @@ class BerkasPernyataanDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('nomor_registrasi'),
             Column::computed('nama'),
             Column::computed('gelombang'),

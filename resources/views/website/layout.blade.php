@@ -83,7 +83,7 @@
                         <li><a href="{{ url('/info-pmb') }}" class="">Info PMB</a></li>
                         <li><a href="{{ url('/berita') }}" class="">Berita</a></li>
                         <li><a href="{{ url('/jadwal-biaya') }}" class="">Jadwal & Biaya</a></li>
-                        <li><a href="{{ url('/galeri') }}" class="">Galeri</a></li>
+                        <li><a href="{{ url('/tutorial') }}" class="">Tutorial</a></li>
                         <li><a href="{{ url('/unduh-berkas') }}" class="">Unduh Berkas</a></li>
                         <li><a href="{{ url('/login') }}" class="">Login</a></li>
                         {{-- <li><a href="#portfolio">Portfolio</a></li> --}}

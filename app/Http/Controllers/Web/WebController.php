@@ -22,9 +22,15 @@ class WebController extends Controller
     {
         return view('website.profile');
     }
+
     public function info_pmb()
     {
         return view('website.info-pmb');
+    }
+
+    public function tutorial()
+    {
+        return view('website.tutorial');
     }
 
     public function jadwal_biaya()

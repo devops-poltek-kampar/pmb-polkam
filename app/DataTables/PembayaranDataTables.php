@@ -23,6 +23,7 @@ class PembayaranDataTables extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', 'pembayarandatatables.action')
             ->addColumn('gelombang', function ($row) {
                 return $row->registrasi->jalur_masuk->gelombang->nama;
@@ -156,6 +157,12 @@ class PembayaranDataTables extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('registrasi.nama')->title("Nama"),
             Column::make('registrasi.hp_mahasiswa')->title("Nomor HP"),
             Column::make("pmb_registrasi_nomor_registrasi")->className('text-start')->title("Nomor Registrasi"),

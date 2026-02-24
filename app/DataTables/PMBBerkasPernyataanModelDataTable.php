@@ -22,6 +22,7 @@ class PMBBerkasPernyataanModelDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', 'pmbberkaspernyataanmodel.action')
             ->addColumn('status', function ($row) {
                 switch ($row->status) {
@@ -126,6 +127,12 @@ class PMBBerkasPernyataanModelDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('registrasi.nama')->title("Nama"),
             Column::make('nomor_registrasi'),
             Column::make('registrasi.jalur_masuk.gelombang.nama')->title("Gelombang"),

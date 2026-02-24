@@ -119,11 +119,6 @@
                                 <td>Rp 200.000</td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>Pengembangan Pendidikan</td>
-                                <td>Rp 10.000.000</td>
-                            </tr>
-                            <tr>
                                 <td>3</td>
                                 <td>Seragam & Perlengkapan</td>
                                 <td>Rp 2.500.000</td>
@@ -145,7 +140,7 @@
                             </tr>
                             <tr class="table-success fw-bold">
                                 <td colspan="2">Total</td>
-                                <td>Rp 16.000.000</td>
+                                <td>Rp 6.000.000</td>
                             </tr>
                         </tbody>
                     </table>
@@ -154,6 +149,50 @@
                 <p class="text-muted mt-2 fst-italic">
                     * Biaya masuk dibayarkan satu kali dan dapat diangsur selama semester 1
                 </p>
+            </div>
+        </div>
+
+        <!-- D. BIAYA MASUK -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h4 class="fw-bold text-success mb-3">Biaya Pengembangan Pendidikan</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+
+                                <th rowspan="2" class="text-center align-middle">Biaya</th>
+                                <th colspan="3" class="text-center">Diskon</th>
+                            </tr>
+
+                            <tr>
+                                {{-- <th>Biaya</th> --}}
+                                <th>Gelombang I</th>
+                                <th>Gelombang II</th>
+                                <th>Gelombang III</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp. 10.000.000</td>
+                                <td>75%</td>
+                                <td>50%</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr class="table-success fw-bold">
+                                <td>Total</td>
+                                <td>Rp. 2.500.000</td>
+                                <td>Rp. 5.000.000</td>
+                                <td>Rp. 7.500.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- <p class="text-muted mt-2 fst-italic">
+                    * Biaya pengembangan pendidika
+                </p> --}}
             </div>
         </div>
 

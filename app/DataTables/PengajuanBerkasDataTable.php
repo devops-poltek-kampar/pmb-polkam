@@ -95,6 +95,7 @@ class PengajuanBerkasDataTable extends DataTable
             })->addColumn('nomor-registrasi', function ($row) {
                 return $row->registrasi->nomor_registrasi;
             })
+            ->addIndexColumn()
             ->addColumn("status", function ($row) {
                 switch ($row->status) {
                     case "Review":
@@ -165,6 +166,12 @@ class PengajuanBerkasDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('registrasi.nama')->title('Nama'),
             Column::computed("nomor-registrasi")->title("Nomor Registrasi"),
             Column::make('registrasi.jalur_masuk.jalur.nama')->title("Jalur Masuk"),

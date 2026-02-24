@@ -1,7 +1,124 @@
 @extends('maba.layout')
 
 @section('content')
-    @push('css')
+    <div class="row mt-3">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Data Registrasi</h5>
+                </div>
+
+                <div class="card-body">
+
+                    {{-- Alert --}}
+                    @if ($dataRegistrasi->status_bayar_registrasi == 'Pending')
+                        <div class="alert alert-info">
+                            DATA REGISTRASI SUDAH DISIMPAN, SILAHKAN MELAKUKAN PEMBAYARAN UANG REGISTRASI SEBESAR Rp.
+                            200.000
+                            <br>
+                            <strong>Silahkan upload bukti pembayaran</strong>
+                        </div>
+                    @endif
+
+                    @if ($dataRegistrasi->status_bayar_registrasi == 'Done')
+                        <div class="alert alert-success">
+                            FORMULIR DAN BUKTI PEMBAYARAN SUDAH DIVERIFIKASI
+                        </div>
+                    @endif
+
+                    {{-- Data --}}
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Nama</div>
+                        <div class="col-md-8">{{ $dataRegistrasi->nama }}</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Email</div>
+                        <div class="col-md-8">{{ $dataRegistrasi->users->email }}</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Nomor Registrasi</div>
+                        <div class="col-md-8">{{ $dataRegistrasi->nomor_registrasi }}</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Jalur</div>
+                        <div class="col-md-8">{{ $dataRegistrasi->jalur_masuk->jalur->nama }}</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Gelombang</div>
+                        <div class="col-md-8">
+                            {{ $dataRegistrasi->jalur_masuk->gelombang->nama }}
+                            ({{ $dataRegistrasi->jalur_masuk->gelombang->tahun }})
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Status Pembayaran</div>
+                        <div class="col-md-8">
+                            <span
+                                class="badge
+                            @if ($dataRegistrasi->status_bayar_registrasi == 'Done') bg-success
+                            @elseif ($dataRegistrasi->status_bayar_registrasi == 'Reject') bg-danger
+                            @else bg-warning text-dark @endif">
+                                {{ $dataRegistrasi->status_bayar_registrasi }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-semibold">Bukti Pembayaran</div>
+                        <div class="col-md-8">
+                            @if ($dataRegistrasi->bukti_pembayaran->first())
+                                <span class="text-success fw-semibold">
+                                    ✔ Sudah upload
+                                </span>
+                            @else
+                                <span class="text-danger fw-semibold">
+                                    ✘ Belum upload
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-semibold">Status Registrasi</div>
+                        <div class="col-md-8">
+                            <span
+                                class="badge
+                            @if ($dataRegistrasi->status_registrasi == 'Approve') bg-success
+                            @elseif ($dataRegistrasi->status_registrasi == 'Reject') bg-danger
+                            @else bg-warning text-dark @endif">
+                                {{ $dataRegistrasi->status_registrasi }}
+                            </span>
+                        </div>
+                    </div>
+
+                    {{-- Action --}}
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="{{ url('/user/detail-registrasi') }}/{{ $dataRegistrasi->id }}"
+                            class="btn btn-success btn-sm">
+                            👁 Detail
+                        </a>
+
+                        <a href="{{ url('/user/form-upload-bukti-registrasi') }}/{{ $dataRegistrasi->nomor_registrasi }}"
+                            class="btn btn-primary btn-sm">
+                            ⬆ Upload Bukti
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    {{-- @push('css')
         <style>
             .table-wrapper {
                 overflow-x: auto;
@@ -45,7 +162,6 @@
                     </div>
                 @endif
 
-                {{-- <a href="{{ url('/user/form-registrasi') }}" class="btn btn-sm btn-primary mb-3">Tambah</a> --}}
                 <div class="table-wrapper">
                     <table class="table table-bordered">
                         <thead>
@@ -129,329 +245,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-    {{-- @if ($dataRegistrasi->status_bayar_registrasi == 'Done')
-
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Upload Dokumen Registrasi</h3>
-                </div>
-                <div class="card-body">
-
-                    @if ($pengajuanBerkas != null)
-
-                        @if ($pengajuanBerkas->status == 'Review')
-                            <div class="alert alert-info">
-                                Anda sudah melakukan pengajuan berkas!
-                                Silahkan menunggu admin memverifikasi berkas anda!
-                            </div>
-                        @endif
-
-                        @if ($pengajuanBerkas->status == 'Reject')
-                            <div class="alert alert-danger">
-                                Silahkan perbaiki berkas yang tidak valid!
-                            </div>
-                        @endif
-
-                        @if ($pengajuanBerkas->status == 'Verified')
-                            <div class="alert alert-primary">
-                                Berkas sudah diverifikasi! silahkan melanjutkan pembayaran registrasi ulang sebesar Rp.
-                                1.000.000 ke rekening politeknik kampar
-                            </div>
-                        @endif
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Status</th>
-                                            <th>Pesan</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        @php
-                                            $nomor = 1;
-                                        @endphp
-
-                                        @foreach ($pengajuanBerkas->berkas as $item)
-                                            <tr>
-                                                <td>{{ $nomor++ }}</td>
-                                                <td>{{ str_replace('_', ' ', $item->kategori) }}</td>
-                                                <td>{{ $item->status }}</td>
-                                                <td>{{ $item->message }}</td>
-                                                <td>
-
-                                                    <button type="button"
-                                                        class="btn btn-sm @if ($item->status == 'Review') btn-info @endif @if ($item->status == 'Reject') btn-danger @endif @if ($item->status == 'Accept') btn-primary @endif"
-                                                        data-bs-toggle="modal" data-bs-target="#file{{ $item->id }}">
-                                                        View
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal modal-xl fade" id="file{{ $item->id }}"
-                                                        tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <form action="{{ url('/user/edit-berkas') }}" method="POST"
-                                                                enctype="multipart/form-data">
-                                                                @csrf
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                            {{ str_replace('_', ' ', $item->kategori) }}
-                                                                        </h1>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $item->id }}">
-                                                                        <input type="hidden" name="name_attribute"
-                                                                            value="{{ $item->kategori }}">
-
-                                                                        <iframe class="w-100" style="height: 1000px"
-                                                                            src="{{ asset('storage') }}/{{ $item->path }}"
-                                                                            frameborder="0"></iframe>
-
-                                                                        @if ($item->status == 'Reject' || $item->status == 'Review')
-                                                                            <label for=""
-                                                                                class="form-label">File</label>
-                                                                            <input type="file" class="form-control"
-                                                                                name="{{ $item->kategori }}">
-                                                                        @endif
-
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        @if ($item->status == 'Review' || $item->status == 'Reject')
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary">Simpan</button>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    @else
-                        @if ($dokumenJalur != null)
-                            <form action="{{ route('user.upload.dokumen') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <input type="hidden" name="pmb_registrasi_id" value="{{ $dataRegistrasi->id }}">
-                                    <input type="hidden" name="pmb_jalur_masuk_id"
-                                        value="{{ $dataRegistrasi->pmb_jalur_masuk_id }}">
-                                    @foreach ($dokumenJalur as $dokumen)
-                                        <div class="col-md-4">
-                                            <label for="" class="form-label">{{ $dokumen->nama }} @if ($dokumen->sifat == 'required')
-                                                    <span class="text-danger">*</span>
-                                                @endif
-                                            </label>
-                                            <input type="file"
-                                                class="form-control @error($dokumen->name_attribute) is-invalid @enderror"
-                                                name="{{ $dokumen->name_attribute }}">
-                                            <p>Format File : {{ $dokumen->tipe }}</p>
-                                            @error($dokumen->name_attribute)
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    @endforeach
-
-                                </div>
-
-                                <button class="btn btn-md btn-primary mt-3">Upload Dokumen</button>
-
-                            </form>
-                        @endif
-                    @endif
-
-                </div>
-            </div>
-
-        </div>
-
-    @endif --}}
-
-
-    {{-- @if ($pengajuanBerkas != null && $pengajuanBerkas->status == 'Verified')
-        <div class="row">
-            <div class="card">
-                <div class="alert alert-info">
-                    SELAMAT BERKAS ANDA SUDAH BERHASIL DIVALIDASI. SILAHKAN MELANJUTKAN REGISTRASI DENGAN MEMBAYAR BIAYA
-                    REGISTRASI ULANG SEBESAR Rp. 1.000.000
-                </div>
-                <div class="card-header">
-                    <h4>Pembayaran Registrasi Ulang</h4>
-                </div>
-
-                <div class="card-body">
-
-                    @if ($dataRegistrasi->bukti_pembayaran->count() > 0)
-                        @switch($dataRegistrasi->bukti_pembayaran->first()->status)
-                            @case('Pending')
-                                <div class="alert alert-info">
-                                    PEMBAYARAN BERHASIL DIKIRIM, SILAHKAN TUNGGU BAGIAN KEUANGAN UNTUK MEMVERIFIKASI PEMBAYARAN
-                                    ANDA!
-                                </div>
-                            @break
-
-                            @case('Reject')
-                                <div class="alert alert-danger">
-                                    MAAF PEMBAYARAN TIDAK BISA DIVERIFIKASI, SILAHKAN KIRIMKAN ULANG BUKTI PEMBAYARAN YANG VALID!
-                                </div>
-                            @break
-
-                            @case('Accept')
-                                <div class="alert alert-primary">
-                                    SELAMAT, PEMBAYARAN SUDAH DIVERIFIKASI OLEH BAGIAN KEUANGAN. SILAHKAN MELANJUTKAN PROSES KE
-                                    TAHAP SELANJUTNYA
-                                </div>
-                            @break
-
-                            @default
-                        @endswitch
-                    @endif
-
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            @if (session('success-pembayaran-message'))
-                                <div class="alert alert-success">
-                                    {{ session('success-pembayaran-message') }}
-                                </div>
-                            @endif
-
-                            @if (session('error-pembayaran-message'))
-                                <div class="alert alert-success">
-                                    {{ session('error-pembayaran-message') }}
-                                </div>
-                            @endif
-                            <form action="{{ url('/user/upload-bukti-registrasi-ulang') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-
-                                <input type="hidden" name="nomor_registrasi"
-                                    value="{{ $dataRegistrasi->nomor_registrasi }}">
-
-                                <label for="" class="form-label">File Bukti Pembayaran</label>
-
-                                @switch($dataRegistrasi->bukti_pembayaran->first()->status)
-                                    @case('Pending')
-                                        <div class="alert alert-info">
-                                            File pembayaran akan diverifikasi oleh keuangan. silahkan menunggu verifikasi.
-                                            <strong>Status :
-                                                {{ $dataRegistrasi->bukti_pembayaran->first()->status }}</strong>
-                                        </div>
-                                    @break
-
-                                    @case('Reject')
-                                        <div class="alert alert-danger">
-                                            File pembayaran gagal diverifikasi. silahkan memasukan ulang file pembayaran yang
-                                            valid!. <strong>Status :
-                                                {{ $dataRegistrasi->bukti_pembayaran->first()->status }}</strong>
-                                        </div>
-                                    @break
-
-                                    @case('Accept')
-                                        <div class="alert alert-success">
-                                            File pembayaran sudah diverifikasi oleh keungan. Silahkan melanjutkan ke tahap
-                                            selanjutnya!. <strong>Status :
-                                                {{ $dataRegistrasi->bukti_pembayaran->first()->status }}</strong>
-                                        </div>
-                                    @break
-
-                                    @default
-                                @endswitch
-
-                                @if ($dataRegistrasi->bukti_pembayaran->first()->status != 'Accept')
-                                    <input type="file" name="file_pembayaran" class="form-control">
-                                @endif
-                                @if ($dataRegistrasi->bukti_pembayaran->count() > 0)
-                                    <img class="w-100 h-100 mt-1"
-                                        src="{{ asset('storage') }}/{{ $dataRegistrasi->bukti_pembayaran->first()->path }}"
-                                        alt="">
-                                @endif
-
-                                @if ($dataRegistrasi->bukti_pembayaran->first()->status != 'Accept')
-                                    <button class="btn btn-sm btn-primary mt-3">Simpan</button>
-                                @endif
-
-                            </form>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <h3 class="mb-4 fw-bold">Data Rekening</h3>
-
-                            <div class="row g-3">
-                                <!-- Card -->
-                                <div class="col-md-4">
-                                    <div class="card border-0 shadow-sm rounded-4">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center mb-3">
-                                                <div class="p-3 bg-primary text-white rounded-4 me-3">
-                                                    <i class="bi bi-bank2 fs-3"></i>
-                                                </div>
-                                                <div>
-                                                    <h5 class="card-title mb-0 fw-bold">Bank BCA</h5>
-                                                    <small class="text-muted">Rekening Utama</small>
-                                                </div>
-                                            </div>
-
-                                            <p class="mb-1"><strong>No. Rekening:</strong></p>
-                                            <div class="d-flex align-items-center">
-                                                <span id="rek1" class="fw-semibold fs-5">1234567890</span>
-                                                <button class="btn btn-sm btn-outline-secondary ms-3"
-                                                    onclick="copyText('rek1')">
-                                                    Copy
-                                                </button>
-                                            </div>
-
-                                            <p class="mt-3 mb-0"><strong>Atas Nama:</strong></p>
-                                            <p class="text-muted">Rahmat Hamdani</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @push('script')
-        <script>
-            function copyText(id) {
-                const text = document.getElementById(id).innerText;
-                navigator.clipboard.writeText(text);
-                alert("Nomor rekening berhasil disalin!");
-            }
-        </script>
-    @endpush --}}
+    </div> --}}
 @endsection

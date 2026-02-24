@@ -25,6 +25,7 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'users.action')
+            ->addIndexColumn()
             ->addColumn("status", function ($row) {
                 $badgeDanger = <<<HTML
                     <span class="badge bg-danger">$row->status</span>
@@ -81,6 +82,12 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('username')->title("Username"),
             Column::make('email')->title("Email"),
             Column::make('nomor_hp')->title("Nomor HP"),

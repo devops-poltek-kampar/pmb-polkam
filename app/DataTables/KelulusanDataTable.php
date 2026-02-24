@@ -23,6 +23,7 @@ class KelulusanDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', 'kelulusan.action')
             ->addColumn('aksi', function ($row) {
                 return <<<HTML
@@ -77,6 +78,7 @@ class KelulusanDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
+
             ->setTableId('kelulusan-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -99,6 +101,12 @@ class KelulusanDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('registrasi.nama'),
             Column::make('registrasi.hp_mahasiswa')->title("Nomor HP"),
             Column::make('nomor_registrasi'),

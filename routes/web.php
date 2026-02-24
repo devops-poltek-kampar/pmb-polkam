@@ -28,17 +28,18 @@ use App\Http\Controllers\Akademik\DashboardController as AkademikDashboardContro
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', [WebController::class, "index"]);
-Route::get('/', function () {
-    echo bcrypt("123456");
-});
-
+Route::get('/', [WebController::class, "index"]);
+// Route::get('/', function () {
+//     echo bcrypt("123456");
+// });
 
 Route::get('/profile', [WebController::class, "profile"]);
 Route::get('/info-pmb', [WebController::class, "info_pmb"]);
 Route::get('/jadwal-biaya', [WebController::class, "jadwal_biaya"]);
 Route::get('/berita', [WebController::class, "berita"]);
 Route::get('/berita/{slug}', [WebController::class, "detail_berita"]);
+
+Route::get('tutorial', [WebController::class, 'tutorial']);
 
 Route::get('/akademik/dashboard', [AkademikDashboardController::class, 'index']);
 Route::get('/akademik/berkas-pernyataan', [BerkasPernyataanController::class, "index"]);

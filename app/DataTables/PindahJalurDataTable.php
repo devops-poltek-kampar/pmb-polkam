@@ -85,6 +85,7 @@ class PindahJalurDataTable extends DataTable
                     </div>
                 HTML;
             })
+            ->addIndexColumn()
             ->rawColumns(['gelombang', 'jalur', 'aksi'])
             ->setRowId('id');
     }
@@ -132,6 +133,12 @@ class PindahJalurDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make('nama'),
             Column::make('nomor_registrasi'),
             Column::computed("gelombang"),

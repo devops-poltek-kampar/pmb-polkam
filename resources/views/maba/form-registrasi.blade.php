@@ -16,19 +16,7 @@
 
                 <div class="row gy-4">
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                        {{-- <select id="negara" class="form-select" style="width: 100%;">
-                            <option value="">Pilih Negara</option>
-                            <option>Indonesia</option>
-                            <option>Malaysia</option>
-                            <option>Singapura</option>
-                            <option>Thailand</option>
-                            <option>Vietnam</option>
-                            <option>Filipina</option>
-                            <option>Brunei Darussalam</option>
-                            <option>Kamboja</option>
-                            <option>Laos</option>
-                            <option>Myanmar</option>
-                        </select> --}}
+
                         <label for="input-label" class="form-label">Nama Lengkap <span class="text-danger">*</span> </label>
                         <input type="text" name="nama" value="{{ old('nama') }}"
                             class="form-control bg-light @error('nama')
@@ -302,7 +290,7 @@
                         <div class="form-check d-flex">
                             <label for="yes" class="mb-3 px-0 text-muted">Ya</label>
                             <input id="yes"
-                                class="form-check-input ms-2 me-2 @error('pernyataan_serah_data')
+                                class="form-check-input bg-primary ms-2 me-2 @error('pernyataan_serah_data')
                             is-invalid
                         @enderror"
                                 name="pernyataan_serah_data" value="Ya"
@@ -310,7 +298,7 @@
 
                             <label for="no" class="mb-3 px-0 text-muted">Tidak</label>
                             <input id="no"
-                                class="form-check-input ms-2 @error('pernyataan_serah_data')
+                                class="form-check-input bg-primary ms-2 @error('pernyataan_serah_data')
                             is-invalid
                         @enderror"
                                 name="pernyataan_serah_data" value="Tidak"
@@ -416,25 +404,6 @@
                                 class="text-danger">*</span></label>
                         <input type="hidden" class="form-control" readonly name="pmb_jalur_masuk_id"
                             value="{{ $dataJalur->id }}">
-                        {{-- <select name="pmb_jalur_masuk_id" onchange="onJalurMasukChange(event)" id=""
-                            value="{{ old('jalur_masuk') }}"
-                            class="form-select bg-light @error('pmb_jalur_masuk_id')
-                            is-invalid
-                        @enderror">
-                            <option value="">Pilih</option>
-                            <option value="1" @if (old('pmb_jalur_masuk_id') == '1') selected @endif>Reguler</option>
-                            <option value="2" @if (old('pmb_jalur_masuk_id') == '2') selected @endif>Prestasi
-                                Akademik</option>
-                            <option value="3" @if (old('pmb_jalur_masuk_id') == '3') selected @endif>
-                                Prestasi Non Akademik</option>
-                            <option value="4" @if (old('pmb_jalur_masuk_id') == '4') selected @endif>RPL (Rekognisi
-                                Pembalajaran Lampau)
-                            </option>
-                            <option value="5" @if (old('pmb_jalur_masuk_id') == '5') selected @endif>KIP Kuliah
-                            </option>
-                            <option value="6" @if (old('pmb_jalur_masuk_id') == '6') selected @endif>Beasiswa Yayasan
-                            </option>
-                        </select> --}}
 
                         @error('pmb_jalur_masuk_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -486,7 +455,31 @@
 
                 </div>
 
-                <div class="mt-3">
+                <div class="form-check mt-3 p-3 border rounded-3">
+
+                    <input type="checkbox" name="pernyataan_data_valid" id="pernyataan-data-valid" value="Ya"
+                        class="form-check-input bg-primary @error('pernyataan_data_valid') is-invalid @enderror"
+                        @if (old('pernyataan_data_valid') == 'Ya') checked @endif>
+
+                    <label class="form-check-label ms-2 small" for="pernyataan-data-valid">
+                        <span class="fw-semibold">
+                            Formulir ini saya isi dengan sebenarnya dan apabila terdapat kekeliruan
+                            yang disengaja saya siap menerima konsekuensi berupa dikeluarkan dari
+                            Politeknik Kampar
+                            <span class="text-danger">*</span>
+                        </span>
+                    </label>
+
+                    @error('pernyataan_data_valid')
+                        <div class="invalid-feedback d-block">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+
+                {{-- <div class="mt-3">
 
                     <div class="d-flex">
                         <input type="checkbox" name="pernyataan_data_valid" id="pernyataan-data-valid"
@@ -511,7 +504,7 @@
                         </div>
                     @enderror
 
-                </div>
+                </div> --}}
 
                 <button type="submit" class="btn btn-primary mt-3">Kirim</button>
             </form>
@@ -560,47 +553,6 @@
                 }
             }
         </script>
-
-        {{-- <script>
-            function onJalurMasukChange(event) {
-
-                if (event.target.value == "5") {
-
-                    $("#lampiran-container").html(`
-                    
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                        <label for="disabled-readonlytext" class="form-label">Surat Keterangan Tidak Mampu <span
-                                class="text-danger">*</span></label>
-                        <input type="file" name="surat_keterangan_tidak_mampu" value="{{ old('surat_keterangan_tidak_mampu') }}"
-                            class="form-control @error('surat_keterangan_tidak_mampu')
-                            is-invalid
-                        @enderror"
-                            name="surat_keterangan_tidak_mampu">
-                        @error('surat_keterangan_tidak_mampu')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <img src="{{ asset('/assets/images/default-user.png') }}" alt="">
-                    </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-                        <label for="disabled-readonlytext" class="form-label">Kartu Keluarga <span
-                                class="text-danger">*</span></label>
-                        <input type="file" name="kartu_keluarga" value="{{ old('kartu_keluarga') }}"
-                            class="form-control @error('kartu_keluarga')
-                            is-invalid
-                        @enderror"
-                            name="kartu_keluarga">
-                        @error('kartu_keluarga')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <img src="{{ asset('/assets/images/default-user.png') }}" alt="">
-                    </div>
-                    
-                    `);
-                }
-
-            }
-        </script> --}}
 
         <script>
             const fileInput = document.getElementById('pas-foto');

@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\DataRegistrasi;
 use App\Models\PMBRegistrasiModel;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -23,6 +24,7 @@ class DataRegistrasiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 return "Data";
             })->addColumn("aksi", function ($row) {
@@ -61,6 +63,9 @@ class DataRegistrasiDataTable extends DataTable
                     <span class="badge text-bg-$color">$row->status_registrasi</span>
                 HTML;
             })
+            ->addColumn('tanggal_registrasi', function ($row) {
+                return Carbon::parse($row->created_at)->locale('id')->translatedFormat('l, j F Y');
+            })
             ->rawColumns(['aksi', 'status', 'jalur', 'gelombang', 'status_registrasi'])
             ->setRowId('id');
     }
@@ -72,7 +77,7 @@ class DataRegistrasiDataTable extends DataTable
      */
     public function query(PMBRegistrasiModel $model): QueryBuilder
     {
-        return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk']);
+        return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk'])->orderBy('created_at', 'DESC');
         // return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk' => function ($queryJalurMasuk) {
         //     return $queryJalurMasuk->with(['jalur', 'gelombang']);
         // }])->select(["id", "status_bayar_registrasi", "nama", "pmb_users_id", "nomor_registrasi"]);
@@ -107,7 +112,14 @@ class DataRegistrasiDataTable extends DataTable
      */
     public function getColumns(): array
     {
+
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->width(50)
+                ->addClass('text-center'),
             Column::make("nama")->addClass("text-start"),
             Column::make("nomor_registrasi")->addClass("text-start"),
             Column::make('hp_mahasiswa')->title("Nomor HP"),
@@ -117,6 +129,7 @@ class DataRegistrasiDataTable extends DataTable
             Column::computed('jalur'),
             Column::computed("status")->title("Pembayaran Registrasi"),
             Column::computed('status_registrasi')->title("Status Registrasi"),
+            Column::computed('tanggal_registrasi'),
             Column::computed("aksi")->title("Aksi"),
         ];
     }

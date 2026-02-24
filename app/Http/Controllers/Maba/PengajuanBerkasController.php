@@ -21,7 +21,6 @@ class PengajuanBerkasController extends Controller
         $this->registrasiService = $registrasiService;
     }
 
-
     public function index()
     {
 
@@ -61,10 +60,10 @@ class PengajuanBerkasController extends Controller
         if ($berkas) {
             $berkas->path = $resultStoreFile;
             $berkas->save();
-            return redirect('/user/data-registrasi')->with('message', "Berhasil edit berkas!");
+            return redirect('/user/pengajuan-berkas')->with('message', "Berhasil edit berkas!");
         }
 
-        return redirect('/user/data-registrasi')->with('message', 'Gagal edit berkas!');
+        return redirect('/user/pengajuan-berkas')->with('failed', 'Gagal edit berkas!');
     }
 
     public function upload_dokumen_registrasi(Request $request)
