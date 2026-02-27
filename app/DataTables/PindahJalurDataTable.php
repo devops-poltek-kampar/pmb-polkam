@@ -110,7 +110,7 @@ class PindahJalurDataTable extends DataTable
         return $this->builder()
             ->setTableId('pindahjalur-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/pindah-jalur'))
             ->orderBy(1)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->scrollX(true)

@@ -91,7 +91,7 @@ class DataRegistrasiDataTable extends DataTable
         return $this->builder()
             ->setTableId('dataregistrasi-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/calon-mahasiswa'))
             ->orderBy(1)
             ->addTableClass("table table-striped table-hovered table-bordered")
             ->scrollX(true)

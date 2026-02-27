@@ -81,7 +81,7 @@ class KelulusanDataTable extends DataTable
 
             ->setTableId('kelulusan-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/lulus-seleksi'))
             ->scrollX(true)
             ->orderBy(1)
             ->selectStyleSingle()

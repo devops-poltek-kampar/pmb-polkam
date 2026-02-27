@@ -75,7 +75,7 @@ class PindahProdiDataTable extends DataTable
         return $this->builder()
             ->setTableId('pindahprodi-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/pindah-prodi'))
             ->addTableClass('table table-bordered border-primary table-success table-hover')
             ->orderBy(1)
             ->parameters(['autoSize' => false])

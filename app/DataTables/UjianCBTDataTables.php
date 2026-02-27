@@ -102,7 +102,7 @@ class UjianCBTDataTables extends DataTable
         return $this->builder()
             ->setTableId('ujiancbtdatatables-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/ujian-cbt'))
             ->orderBy(1)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->scrollX(true)

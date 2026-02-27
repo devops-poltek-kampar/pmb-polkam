@@ -60,7 +60,7 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->setTableId('users-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/data-user'))
             ->scrollX(true)
             ->addTableClass('table table-striped table-hovered table-bordered')
             // ->parameters(['autoWidth' => false])

@@ -135,7 +135,7 @@ class PembayaranDataTables extends DataTable
         return $this->builder()
             ->setTableId('pembayarandatatables-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/keuangan/data-pembayaran'))
             ->orderBy(1)
             ->selectStyleSingle()
             ->addTableClass('table table-striped table-hovered table-bordered')

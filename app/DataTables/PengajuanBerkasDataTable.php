@@ -144,7 +144,7 @@ class PengajuanBerkasDataTable extends DataTable
         return $this->builder()
             ->setTableId('pengajuanberkas-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/pengajuan-berkas'))
             ->orderBy(1)
             ->scrollX(true)
             ->addTableClass('table table-striped table-hovered table-bordered')

@@ -57,7 +57,7 @@ class BeritaDataTable extends DataTable
         return $this->builder()
             ->setTableId('berita-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/master-web/berita'))
             ->orderBy(1)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->parameters(['autoWidth' => false])

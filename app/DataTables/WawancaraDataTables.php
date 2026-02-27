@@ -99,7 +99,7 @@ class WawancaraDataTables extends DataTable
         return $this->builder()
             ->setTableId('wawancaradatatables-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax(url('/pmb/wawancara'))
             ->orderBy(1)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->selectStyleSingle()
