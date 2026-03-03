@@ -5,7 +5,6 @@ namespace App\Http\Controllers\PMB;
 use App\DataTables\PengajuanBerkasDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\PMBBerkasModel;
-use App\Models\PMBCBTModel;
 use App\Models\PMBKelulusanModel;
 use App\Models\PMBPengajuanBerkasModel;
 use Illuminate\Http\Request;
@@ -20,6 +19,7 @@ class PengajuanBerkasController extends Controller
 
     public function detail($pengajuanBerkasId)
     {
+
         $berkas = PMBPengajuanBerkasModel::with(['registrasi' => function ($queryRegistrasi) {
             return $queryRegistrasi->with(['lampiran' => function ($queryLampiran) {
                 return $queryLampiran->select(['id', 'pmb_registrasi_id', 'path']);

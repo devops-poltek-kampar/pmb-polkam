@@ -29,7 +29,9 @@ class PengajuanBerkasDataTable extends DataTable
                 $htmlProdi = "";
                 $urlLulus = url('/pmb/pengajuan-berkas/lulus');
                 $csrfToken = csrf_field();
-                $url = url('/pmb/pengajuan-berkas/detail') . "/$row->id";
+                // $url = url('/pmb/pengajuan-berkas/detail') . "/$row->id";
+
+                $url = url('/pmb/pengajuan-berkas/detail') . "/" . $row->id;
                 foreach ($prodi as $key => $value) {
 
                     if ($row->registrasi->prodi_pilihan_1 == $value->kode_prodi) {
@@ -53,12 +55,13 @@ class PengajuanBerkasDataTable extends DataTable
                         <div class="modal-content">
                              <form action="$urlLulus" method="POST">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Program Studi Kelulusan title</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Program Studi Kelulusan $row->nomor_registrasi</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
 
                                 $csrfToken
+
                                 <input type="hidden" name="pmb_pengajuan_berkas_id" value="$row->id">
                                 <input type="hidden" name="nomor_registrasi" value="$row->nomor_registrasi">
                                 
@@ -125,15 +128,11 @@ class PengajuanBerkasDataTable extends DataTable
      */
     public function query(PMBPengajuanBerkasModel $model): QueryBuilder
     {
-        // return $model->newQuery();
         return $model->with(['registrasi' => function ($queryRegistrasi) {
             return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
                 return $queryJalurMasuk->with(['jalur']);
-            }]);
-        }])->select(['*']); //newQuery()->with(['registrasi']);
-        // return $model->with(['registrasi' => function ($queryRegistrasi) {
-        //     return $queryRegistrasi->with(['jalur_masuk']);
-        // }, "user"]);
+            }])->select('id as registrasi_id', 'pmb_users_id', 'pmb_gelombang_id', 'pmb_jalur_masuk_id', 'nomor_registrasi', 'nama', 'tempat_lahir');
+        }])->select(['*']);
     }
 
     /**
@@ -172,6 +171,8 @@ class PengajuanBerkasDataTable extends DataTable
                 ->orderable(false)
                 ->width(50)
                 ->addClass('text-center'),
+
+            Column::make('nomor_registrasi'),
             Column::make('registrasi.nama')->title('Nama'),
             Column::computed("nomor-registrasi")->title("Nomor Registrasi"),
             Column::make('registrasi.jalur_masuk.jalur.nama')->title("Jalur Masuk"),
