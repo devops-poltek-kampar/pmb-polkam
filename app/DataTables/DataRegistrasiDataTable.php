@@ -77,7 +77,8 @@ class DataRegistrasiDataTable extends DataTable
      */
     public function query(PMBRegistrasiModel $model): QueryBuilder
     {
-        return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk'])->orderBy('created_at', 'DESC');
+        return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk', 'prodi_1', 'prodi_2'])
+            ->orderBy('created_at', 'DESC');
         // return $model->with(['lampiran', 'users', 'bukti_pembayaran', 'jalur_masuk' => function ($queryJalurMasuk) {
         //     return $queryJalurMasuk->with(['jalur', 'gelombang']);
         // }])->select(["id", "status_bayar_registrasi", "nama", "pmb_users_id", "nomor_registrasi"]);
@@ -129,6 +130,8 @@ class DataRegistrasiDataTable extends DataTable
             Column::computed('jalur'),
             Column::computed("status")->title("Pembayaran Registrasi"),
             Column::computed('status_registrasi')->title("Status Registrasi"),
+            Column::make('prodi_1.nama')->title("Pilihan 1"),
+            Column::make('prodi_2.nama')->title("Pilihan 2"),
             Column::computed('tanggal_registrasi'),
             Column::computed("aksi")->title("Aksi"),
         ];
