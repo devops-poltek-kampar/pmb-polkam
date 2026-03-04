@@ -22,9 +22,9 @@ class PengajuanBerkasDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $prodi = MasterProgramStudiModel::get(['kode_prodi', 'nama']);
+        // $prodi = MasterProgramStudiModel::get(['kode_prodi', 'nama']);
         return (new EloquentDataTable($query))
-            ->addColumn('aksi', function ($row) use ($prodi) {
+            ->addColumn('aksi', function ($row) {
 
                 $htmlProdi = "";
                 $urlLulus = url('/pmb/pengajuan-berkas/lulus');
@@ -32,14 +32,9 @@ class PengajuanBerkasDataTable extends DataTable
                 // $url = url('/pmb/pengajuan-berkas/detail') . "/$row->id";
 
                 $url = url('/pmb/pengajuan-berkas/detail') . "/" . $row->id;
-                foreach ($prodi as $key => $value) {
 
-                    if ($row->registrasi->prodi_pilihan_1 == $value->kode_prodi) {
-                        $htmlProdi .= "<option value='$value->kode_prodi' selected>$value->nama</option>";
-                    } else {
-                        $htmlProdi .= "<option value='$value->kode_prodi'>$value->nama</option>";
-                    }
-                }
+                $htmlProdi .= "<option value='{$row->registrasi->prodi_pilihan_1}' selected>{$row->registrasi->prodi_1->nama}</option>";
+                $htmlProdi .= "<option value='{$row->registrasi->prodi_pilihan_2}'>{$row->registrasi->prodi_2->nama}</option>";
 
                 return <<<HTML
                 <!-- Button trigger modal -->
@@ -68,7 +63,7 @@ class PengajuanBerkasDataTable extends DataTable
                                 <label for="">Program Studi</label>
                                 
                                 <select name="kode_prodi" class="form-select" id="">
-                                    <option>Pilih</option>
+                                    <!-- <option>Pilih</option> -->
                                     $htmlProdi
 
                                 </select>
@@ -81,17 +76,8 @@ class PengajuanBerkasDataTable extends DataTable
                             </form>
                         </div>
                     </div>
-                </div>
-                
-                
+                </div>                
                 HTML;
-
-                // $url = url('/pmb/pengajuan-berkas/detail') . "/$row->id";
-                // $urlLulus = url('/pmb/pengajuan-berkas/lulus') . "/$row->id";
-                // return <<<HTML
-                //     <a class="btn btn-sm btn-success" href="$urlLulus">Lulus</a>
-                //     <a class="btn btn-sm btn-primary" href="$url">Lihat Berkas</a>
-                // HTML;
             })->addColumn('tanggal_pengajuan', function ($row) {
                 $date = Carbon::parse($row->created_at)->locale('id');
                 return  $date->translatedFormat('j F Y H:i');
@@ -131,7 +117,7 @@ class PengajuanBerkasDataTable extends DataTable
         return $model->with(['registrasi' => function ($queryRegistrasi) {
             return $queryRegistrasi->with(['jalur_masuk' => function ($queryJalurMasuk) {
                 return $queryJalurMasuk->with(['jalur']);
-            }])->select('id as registrasi_id', 'pmb_users_id', 'pmb_gelombang_id', 'pmb_jalur_masuk_id', 'nomor_registrasi', 'nama', 'tempat_lahir');
+            }, 'prodi_1', 'prodi_2'])->select('id as registrasi_id', 'prodi_pilihan_1', 'prodi_pilihan_2', 'pmb_users_id', 'pmb_gelombang_id', 'pmb_jalur_masuk_id', 'nomor_registrasi', 'nama', 'tempat_lahir');
         }])->select(['*']);
     }
 
@@ -177,6 +163,8 @@ class PengajuanBerkasDataTable extends DataTable
             Column::computed("nomor-registrasi")->title("Nomor Registrasi"),
             Column::make('registrasi.jalur_masuk.jalur.nama')->title("Jalur Masuk"),
             Column::computed("tanggal_pengajuan")->title("Tanggal Pengajuan"),
+            Column::make('registrasi.prodi_1.nama')->title("Pilihan 1"),
+            Column::make('registrasi.prodi_2.nama')->title("Pilihan 2"),
             Column::computed('status'),
             Column::computed('aksi')->title("Aksi")
         ];
