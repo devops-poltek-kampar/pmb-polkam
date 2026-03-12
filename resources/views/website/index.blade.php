@@ -21,13 +21,22 @@
                                     <span>DAFTAR SEKARANG</span>
                                     <i class="bi bi-arrow-right ms-2"></i>
                                 </a>
-                                <a href="https://youtu.be/sJ_1bmyjwAI?si=WoEI4-Ol51rV1se8"
+
+                                <a href="{{ $beranda->link_video }}"
                                     class="glightbox btn-video d-inline-flex align-items-center">
                                     <span class="play-icon d-inline-flex align-items-center justify-content-center me-2">
                                         <i class="bi bi-play-fill"></i>
                                     </span>
                                     <span>Lihat Profil</span>
                                 </a>
+
+                                {{-- <a href="https://youtu.be/sJ_1bmyjwAI?si=WoEI4-Ol51rV1se8"
+                                    class="glightbox btn-video d-inline-flex align-items-center">
+                                    <span class="play-icon d-inline-flex align-items-center justify-content-center me-2">
+                                        <i class="bi bi-play-fill"></i>
+                                    </span>
+                                    <span>Lihat Profil</span>
+                                </a> --}}
                             </div>
                             <div class="mini-stats d-flex flex-wrap gap-4 mt-4" data-aos="zoom-in" data-aos-delay="250">
                                 <div class="stat d-flex align-items-center">
@@ -50,8 +59,12 @@
                 <div class="col-lg-6">
                     <div class="media-stack" data-aos="zoom-in" data-aos-delay="200">
                         <figure class="media primary shadow-sm">
-                            <img src="{{ asset('/assets-website/img/direktorat-polkam.jpeg') }}" class="img-fluid"
+
+                            <img src="{{ asset('/storage') }}/{{ $beranda->path_img1 }}" class="img-fluid"
                                 alt="Hero visual">
+
+                            {{-- <img src="{{ asset('/assets-website/img/direktorat-polkam.jpeg') }}" class="img-fluid"
+                                alt="Hero visual"> --}}
                         </figure>
                         {{-- <figure class="media secondary shadow-sm">
                                 <img src="assets-website/img/foto-1.jpg" class="img-fluid" alt="Supporting visual">
@@ -70,7 +83,10 @@
                 <div class="col-lg-6">
                     <div class="media-stack" data-aos="zoom-in" data-aos-delay="200">
                         <figure class="media primary shadow-sm">
-                            <img src="{{ asset('/assets-website/img/foto-1.jpg') }}" class="img-fluid" alt="Hero visual">
+                            <img src="{{ asset('/storage') }}/{{ $beranda->path_img2 }}" class="img-fluid"
+                                alt="Hero visual">
+
+                            {{-- <img src="{{ asset('/assets-website/img/foto-1.jpg') }}" class="img-fluid" alt="Hero visual"> --}}
                         </figure>
                         {{-- <figure class="media secondary shadow-sm">
                                 <img src="assets-website/img/foto-1.jpg" class="img-fluid" alt="Supporting visual">
@@ -86,7 +102,10 @@
                 <div class="col-lg-6">
                     <div class="media-stack" data-aos="zoom-in" data-aos-delay="200">
                         <figure class="media primary shadow-sm">
-                            <img src="{{ asset('/assets-website/img/foto-2.jpg') }}" class="img-fluid" alt="Hero visual">
+                            <img src="{{ asset('/storage') }}/{{ $beranda->path_img3 }}" class="img-fluid"
+                                alt="Hero visual">
+
+                            {{-- <img src="{{ asset('/assets-website/img/foto-2.jpg') }}" class="img-fluid" alt="Hero visual"> --}}
                         </figure>
                         {{-- <figure class="media secondary shadow-sm">
                                 <img src="assets-website/img/foto-1.jpg" class="img-fluid" alt="Supporting visual">
@@ -111,8 +130,11 @@
         <div class="row">
             <div class="col-md-12">
 
-                <img id="banner" class="w-100 h-100" src="{{ asset('/assets-website/img/hero-image.jpg') }}"
+                <img id="banner" class="w-100 h-100" src="{{ asset('/storage') }}/{{ $beranda->banner_path }}"
                     alt="">
+
+                {{-- <img id="banner" class="w-100 h-100" src="{{ asset('/assets-website/img/hero-image.jpg') }}"
+                    alt=""> --}}
 
             </div>
         </div>

@@ -13,7 +13,7 @@ class BeritaController extends Controller
 {
     public function index(BeritaDataTable $dataTable)
     {
-        return $dataTable->render('pmb.master-web.berita.berita');
+        return $dataTable->render('pmb.master-web.berita.index');
     }
 
     public function tambah()
@@ -53,11 +53,22 @@ class BeritaController extends Controller
             "slug" => strtolower(str_replace(" ", "-", $dataBerita['subjek'])),
             'subjek' => $dataBerita['subjek'],
             "deskripsi" => $dataBerita['deskripsi'],
-            "thumbnail" => $request->file('thumbnail')->store('/upload/berita')
+            "thumbnail" => $request->file('thumbnail')->store('/web/berita')
         ]);
         if ($berita) {
             return redirect('/pmb/master-web/berita')->with("message", "Berhasil simpan data!");
         }
         return back()->with("error-message", "Gagal simpan data!");
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+        $berita = PMBBeritaModel::find($id);
+        if ($berita) {
+            $berita->delete();
+            return response()->json(['status' => 200, 'message' => "Berhasil hapus berita!"]);
+        }
+        return response()->json(['status' => 404, 'message' => "Data tidak ditemukan!"], 404);
     }
 }

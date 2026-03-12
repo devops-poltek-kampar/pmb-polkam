@@ -39,7 +39,8 @@ Route::get('/jadwal-biaya', [WebController::class, "jadwal_biaya"]);
 Route::get('/berita', [WebController::class, "berita"]);
 Route::get('/berita/{slug}', [WebController::class, "detail_berita"]);
 
-Route::get('tutorial', [WebController::class, 'tutorial']);
+Route::get('/tutorial', [WebController::class, 'tutorial']);
+Route::get('/unduh-berkas', [WebController::class, 'unduh_berkas']);
 
 Route::get('/akademik/dashboard', [AkademikDashboardController::class, 'index']);
 Route::get('/akademik/berkas-pernyataan', [BerkasPernyataanController::class, "index"]);

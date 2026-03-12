@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Spatie\Permission\Traits\HasRoles;
 
 class PMBUsersModel extends Authenticatable
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasRoles;
     protected $table = "pmb_users";
     public $incrementing = false;
     protected $keyType = "string";

@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="d-sm-block d-none">
                                     <p class="fw-semibold mb-0 lh-1 profile-heading d-flex align-items-center">
-                                        {{ session('username') }}<span class="ms-1"><i
+                                        {{ Auth::user()->username }}<span class="ms-1"><i
                                                 class="ri-arrow-down-s-line"></i></span></p>
                                 </div>
                             </div>
@@ -488,24 +488,27 @@
                                 {{-- <li class="slide side-menu__label1">
                                     <a href="javascript:void(0);">Tables</a>
                                 </li> --}}
+
+                                <li class="slide">
+                                    <a href="{{ url('/pmb/master-web/beranda') }}"
+                                        class="side-menu__item">Beranda</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="" class="side-menu__item">Info PMB</a>
+                                </li>
+
                                 <li class="slide">
                                     <a href="{{ url('/pmb/master-web/berita') }}" class="side-menu__item">Berita</a>
                                 </li>
 
                                 <li class="slide">
-                                    <a href="" class="side-menu__item">Halaman</a>
+                                    <a href="{{ url('/pmb/master-web/tutorial') }}"
+                                        class="side-menu__item">Tutorial</a>
                                 </li>
 
                                 <li class="slide">
-                                    <a href="" class="side-menu__item">Gallery</a>
-                                </li>
-
-                                <li class="slide">
-                                    <a href="" class="side-menu__item">Berkas</a>
-                                </li>
-
-                                <li class="slide">
-                                    <a href="" class="side-menu__item">Slider</a>
+                                    <a href="{{ url('/pmb/master-web/unduh-berkas') }}" class="side-menu__item">Unduh
+                                        Berkas</a>
                                 </li>
 
                             </ul>
@@ -658,6 +661,10 @@
 
     {{-- Select2 JS --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     @stack('script')
 </body>

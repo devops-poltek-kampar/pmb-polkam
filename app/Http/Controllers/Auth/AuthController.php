@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Socialite;
 
@@ -39,6 +40,7 @@ class AuthController extends Controller
 
     public function form_reset_password($userId)
     {
+
         $forgotPassword = PMBForgotPasswordModel::where(['pmb_users_id' => $userId])->first();
         if (!$forgotPassword) {
             return redirect('/');
@@ -171,6 +173,8 @@ class AuthController extends Controller
                 "foto_profile" => $googleUser->getAvatar(),
             ]);
 
+            $user->assignRole('user');
+
             session(["id" => $user->id, 'username' => $user->username, "email" => $user->email, "role_id" => $user->pmb_role_id]);
 
             if ($user) {
@@ -226,9 +230,20 @@ class AuthController extends Controller
 
     public function auth(Request $request)
     {
+
+        $key = $request->post('email') . ":" . $request->ip();
+
+        if (RateLimiter::tooManyAttempts($key, 5)) {
+            return back()->with("error-message", "Terlalu banyak percobaan, silahkan coba dalam " . RateLimiter::availableIn($key) . " detik");
+        }
+
+        RateLimiter::hit($key, 60);
+
         $resultLogin = $this->authService->auth($request->except("_token"));
         // return response()->json($resultLogin);
         if ($resultLogin['status'] == 200) {
+
+            RateLimiter::clear($key);
             return redirect($resultLogin['path']);
         }
         return back()->with('error-message', $resultLogin['message']);

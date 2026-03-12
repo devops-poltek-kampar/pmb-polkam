@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class BeritaDataTable extends DataTable
@@ -28,7 +25,7 @@ class BeritaDataTable extends DataTable
             ->addColumn('aksi', function ($row) {
                 $urlEdit = url('/pmb/master-web/berita/edit') . "/" . $row->id;
                 return <<<HTML
-                    <a class="btn btn-sm btn-danger">Delete</a>
+                    <button type="button" onclick="deleteBerita('$row->id')" class="btn btn-sm btn-danger">Delete</button>
                     <a href="$urlEdit" class="btn btn-sm btn-warning">Edit</a>
                 HTML;
             })
@@ -57,19 +54,19 @@ class BeritaDataTable extends DataTable
         return $this->builder()
             ->setTableId('berita-table')
             ->columns($this->getColumns())
-            ->minifiedAjax(url('/master-web/berita'))
+            ->minifiedAjax(url('/pmb/master-web/berita'))
             ->orderBy(1)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->parameters(['autoWidth' => false])
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+            ->selectStyleSingle();
+        // ->buttons([
+        //     Button::make('excel'),
+        //     Button::make('csv'),
+        //     Button::make('pdf'),
+        //     Button::make('print'),
+        //     Button::make('reset'),
+        //     Button::make('reload')
+        // ]);
     }
 
     /**
@@ -82,15 +79,6 @@ class BeritaDataTable extends DataTable
             Column::make('slug'),
             Column::computed('deskripsi'),
             Column::computed('aksi')
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
-            // Column::make('id'),
-            // Column::make('add your columns'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
         ];
     }
 

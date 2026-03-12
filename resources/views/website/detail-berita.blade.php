@@ -24,31 +24,31 @@
             }
 
             /* .berita-card {
-                                                                        transition: all 0.3s ease;
-                                                                        cursor: pointer;
-                                                                    }
+                                                                                                                                transition: all 0.3s ease;
+                                                                                                                                cursor: pointer;
+                                                                                                                            }
 
-                                                                    .berita-card:hover {
-                                                                        transform: translateY(-6px);
-                                                                        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-                                                                    }
+                                                                                                                            .berita-card:hover {
+                                                                                                                                transform: translateY(-6px);
+                                                                                                                                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+                                                                                                                            }
 
-                                                                    .berita-img {
-                                                                        transition: transform 0.4s ease;
-                                                                    }
+                                                                                                                            .berita-img {
+                                                                                                                                transition: transform 0.4s ease;
+                                                                                                                            }
 
-                                                                    .berita-card:hover .berita-img {
-                                                                        transform: scale(1.08);
-                                                                    }
+                                                                                                                            .berita-card:hover .berita-img {
+                                                                                                                                transform: scale(1.08);
+                                                                                                                            }
 
-                                                                    .berita-title h4 {
-                                                                        transition: color 0.3s ease;
-                                                                    }
+                                                                                                                            .berita-title h4 {
+                                                                                                                                transition: color 0.3s ease;
+                                                                                                                            }
 
-                                                                    .berita-card:hover .berita-title h4 {
-                                                                        color: #0d6efd;
-                                                                        warna primary Bootstrap
-                                                                    } */
+                                                                                                                            .berita-card:hover .berita-title h4 {
+                                                                                                                                color: #0d6efd;
+                                                                                                                                warna primary Bootstrap
+                                                                                                                            } */
         </style>
     @endpush
 
@@ -59,32 +59,36 @@
             <div class="col-lg-8">
 
                 <!-- CATEGORY -->
-                <span class="badge badge-category mb-3">
+                {{-- <span class="badge badge-category mb-3">
                     Pendidikan
-                </span>
+                </span> --}}
 
                 <!-- TITLE -->
                 <h1 class="fw-bold mb-3">
-                    Pengumuman Hasil Seleksi Penerimaan Mahasiswa Baru 2026
+
+                    {{ $berita->subjek }}
+
                 </h1>
 
                 <!-- META -->
                 <div class="text-muted mb-4">
                     <small>
                         Dipublikasikan pada
-                        <strong>20 Januari 2026</strong> ·
+                        <strong>{{ $berita->created_at->diffForHumans() }}</strong> ·
                         Oleh <strong>Admin</strong>
                     </small>
                 </div>
 
                 <!-- IMAGE -->
                 <div class="news-header mb-4">
-                    <img src="https://via.placeholder.com/900x450" class="img-fluid w-100" alt="Gambar Berita">
+                    <img src="{{ asset('/storage') }}/{{ $berita->thumbnail }}" class="img-fluid w-100" alt="Gambar Berita">
                 </div>
 
                 <!-- CONTENT -->
                 <div class="news-content bg-white p-4 rounded-4 shadow-sm">
-                    <p>
+
+                    {!! $berita->deskripsi !!}
+                    {{-- <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Pellentesque habitant morbi tristique senectus et netus et
                         malesuada fames ac turpis egestas.
@@ -99,7 +103,7 @@
                     <p>
                         Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
                         Vivamus suscipit tortor eget felis porttitor volutpat.
-                    </p>
+                    </p> --}}
                 </div>
 
             </div>
@@ -108,7 +112,7 @@
             <div class="col-lg-4 mt-5 mt-lg-0">
 
                 <!-- INFO BOX -->
-                <div class="card mb-4 shadow-sm rounded-4">
+                {{-- <div class="card mb-4 shadow-sm rounded-4">
                     <div class="card-body">
                         <h6 class="fw-bold mb-3">Informasi</h6>
                         <ul class="list-unstyled mb-0">
@@ -117,7 +121,7 @@
                             <li>👁 Dibaca: 1.245 kali</li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- RELATED NEWS -->
                 <div class="card shadow-sm rounded-4">

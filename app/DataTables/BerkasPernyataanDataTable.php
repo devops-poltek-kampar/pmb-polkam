@@ -124,7 +124,7 @@ class BerkasPernyataanDataTable extends DataTable
         return $this->builder()
             ->setTableId('berkaspernyataan-table')
             ->columns($this->getColumns())
-            ->minifiedAjax(url('/pmb/berkas-pernyataan'))
+            ->minifiedAjax(url('/akademik/berkas-pernyataan'))
             ->scrollX(true)
             ->addTableClass('table table-striped table-hovered table-bordered')
             ->parameters([

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

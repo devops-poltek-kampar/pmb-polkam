@@ -23,7 +23,9 @@
 
                         <label for="" class="form-label">Thumbnail</label>
                         <input type="file" name="thumbnail" class="form-control mb-3">
-                        <img class="w-100 my-3" src="{{ asset('/storage') }}/{{ $berita->thumbnail }}" alt="">
+                        <img class="w-50 my-3" src="{{ asset('/storage') }}/{{ $berita->thumbnail }}" alt="">
+
+                        <br>
 
                         <label for="" class="form-label">Deskripsi</label>
                         <textarea id="editor" name="deskripsi" cols="30" rows="10">{{ $berita->deskripsi }}</textarea>

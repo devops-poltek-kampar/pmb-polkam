@@ -23,11 +23,14 @@
 
                         <!-- Responsive YouTube Embed -->
                         <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
-                            <iframe width="560" height="315"
+
+                            {!! $tutorial->link !!}
+
+                            {{-- <iframe width="560" height="315"
                                 src="https://www.youtube.com/embed/7FsPLyOiW04?si=ZhmfF9bWIgBabQtz"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> --}}
 
                         </div>
 

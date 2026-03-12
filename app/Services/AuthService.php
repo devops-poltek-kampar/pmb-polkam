@@ -18,10 +18,13 @@ class AuthService
 
     public function register(array $dataRegistrasi)
     {
-        $resultRegistrasiAccount = $this->authRepository->storeDataRegisterAccount($dataRegistrasi);
-        if ($resultRegistrasiAccount) {
+        $user = $this->authRepository->storeDataRegisterAccount($dataRegistrasi);
+        if ($user) {
             try {
-                event(new UserRegisterEvent($resultRegistrasiAccount));
+
+                $user->assignRole('user');
+
+                event(new UserRegisterEvent($user));
                 // Mail::to($resultRegistrasiAccount->email)->send(new ActivationEmail($resultRegistrasiAccount));
             } catch (Exception $ex) {
                 return ['status' => 403, "message" => "Maaf email tidak ditemukan!"];
