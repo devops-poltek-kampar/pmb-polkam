@@ -16,9 +16,7 @@ use App\Http\Controllers\PMB\UsersController;
 use App\Http\Controllers\PMB\WawancaraController;
 use App\Http\Controllers\Web\BeritaController;
 use App\Http\Controllers\Web\WebController;
-use App\Http\Middleware\PMBMiddleware;
-
-Route::middleware(PMBMiddleware::class);
+// Route::middleware(PMBMiddleware::class);
 
 Route::get('/dashboard', [PMBDashboardController::class, 'dashboard']);
 
@@ -64,6 +62,8 @@ Route::get('/portal-registrasi/program-studi/{jalurMasukId}', [PortalRegistrasiC
 Route::post('/portal-registrasi/program-studi/create', [PortalRegistrasiController::class, "create_prodi_jalur"]);
 
 Route::get('/data-user', [UsersController::class, "index"]);
+Route::put('/data-user/status', [UsersController::class, 'set_status']);
+Route::put('/data-user/reset-password', [UsersController::class, 'reset_password']);
 
 Route::get('/master-web/berita', [BeritaController::class, "index"]);
 Route::get('/master-web/berita/tambah', [BeritaController::class, "tambah"]);
@@ -71,9 +71,7 @@ Route::post('/master-web/berita/create', [BeritaController::class, "create"]);
 Route::get('/master-web/berita/edit/{beritaId}', [BeritaController::class, "form_edit_berita"]);
 Route::post('/master-web/berita/edit', [BeritaController::class, "edit_berita"]);
 Route::post('/master-web/edit-beranda', [WebController::class, 'edit_beranda']);
-
 Route::get('/master-web/beranda', [WebController::class, "beranda"]);
-
 Route::get('/master-web/tutorial', [WebController::class, 'admin_tutorial']);
 Route::post('master-web/tutorial/edit', [WebController::class, "edit_tutorial"]);
 Route::delete('/master-web/berita/delete', [BeritaController::class, 'delete']);
