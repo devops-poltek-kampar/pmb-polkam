@@ -24,7 +24,7 @@
             function ResetPassword(id) {
                 Swal.fire({
                     title: "Masukan Password Baru!",
-                    input: "text",
+                    input: "password",
                     inputAttributes: {
                         autocapitalize: "off"
                     },
