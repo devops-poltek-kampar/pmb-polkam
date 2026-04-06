@@ -184,6 +184,8 @@ class AuthController extends Controller
                 return redirect('/user/dashboard');
             }
         }
+
+        Auth::login($userByGoogleId);
         session(["id" => $userByGoogleId->id, 'username' => $userByGoogleId->username, "email" => $userByGoogleId->email, "role_id" => $userByGoogleId->pmb_role_id]);
         return redirect('/user/dashboard');
     }
