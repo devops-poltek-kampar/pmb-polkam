@@ -32,8 +32,6 @@
                     confirmButtonText: "Reset",
                     showLoaderOnConfirm: true,
                     preConfirm: async (newPassword) => {
-                        console.log(newPassword);
-
                         $.ajax({
                             type: "PUT",
                             url: `{{ url('/pmb/data-user/reset-password') }}`,

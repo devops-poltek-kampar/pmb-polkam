@@ -11,6 +11,7 @@ use App\Services\AuthService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -175,9 +176,11 @@ class AuthController extends Controller
 
             $user->assignRole('user');
 
+
             session(["id" => $user->id, 'username' => $user->username, "email" => $user->email, "role_id" => $user->pmb_role_id]);
 
             if ($user) {
+                Auth::login($user);
                 return redirect('/user/dashboard');
             }
         }
