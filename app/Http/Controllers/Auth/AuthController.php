@@ -176,7 +176,6 @@ class AuthController extends Controller
 
             $user->assignRole('user');
 
-
             session(["id" => $user->id, 'username' => $user->username, "email" => $user->email, "role_id" => $user->pmb_role_id]);
 
             if ($user) {

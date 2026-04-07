@@ -27,19 +27,19 @@ class WawancaraDataTables extends DataTable
             ->addColumn('action', 'wawancaradatatables.action')
 
             ->addColumn("nama", function ($row) {
-                return $row->registrasi->nama;
+                return $row->registrasi?->nama;
             })
             ->addColumn("email", function ($row) {
-                return $row->registrasi->users->email;
+                return $row->registrasi?->users->email;
             })
             ->addColumn("gelombang", function ($row) {
-                return $row->registrasi->jalur_masuk->gelombang->nama;
+                return $row->registrasi?->jalur_masuk?->gelombang?->nama;
             })
             ->addColumn("jalur", function ($row) {
-                return $row->registrasi->jalur_masuk->jalur->nama;
+                return $row->registrasi?->jalur_masuk?->jalur?->nama;
             })
             ->addColumn("tahun", function ($row) {
-                return $row->registrasi->jalur_masuk->gelombang->tahun;
+                return $row->registrasi?->jalur_masuk?->gelombang?->tahun;
             })
             ->addColumn('aksi', function ($row) {
                 $urlLulusWawancara = url('/pmb/wawancara/lulus') . "/" . $row->id;
