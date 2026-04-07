@@ -26,13 +26,13 @@ class PembayaranDataTables extends DataTable
             ->addIndexColumn()
             ->addColumn('action', 'pembayarandatatables.action')
             ->addColumn('gelombang', function ($row) {
-                return $row->registrasi->jalur_masuk->gelombang->nama;
+                return $row->registrasi?->jalur_masuk?->gelombang?->nama;
             })
             ->addColumn('jalur', function ($row) {
-                return $row->registrasi->jalur_masuk->jalur->nama;
+                return $row->registrasi?->jalur_masuk?->jalur?->nama;
             })
             ->addColumn('tahun', function ($row) {
-                return $row->registrasi->jalur_masuk->gelombang->tahun;
+                return $row->registrasi?->jalur_masuk?->gelombang?->tahun;
             })
             ->addColumn('status', function ($row) {
                 switch ($row->status) {
