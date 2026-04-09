@@ -24,6 +24,8 @@ Route::get('/calon-mahasiswa', [CalonMahasiswaController::class, "index"]);
 Route::get('/calon-mahassiwa/acc-formulir/{nomorRegistrasi}', [CalonMahasiswaController::class, "acc_formulir"]);
 Route::get('/calon-mahasiswa/detail-registrasi/{registrasiId}', [CalonMahasiswaController::class, "detail_registrasi"]);
 
+Route::get('/export-calon-mahasiswa', [CalonMahasiswaController::class, 'export_calon_mahasiswa']);
+
 Route::get('/ujian-cbt', [UjianCBTController::class, "index"]);
 Route::get('/ujian-cbt/lulus/{ujianCbtId}', [UjianCBTController::class, "lulus"]);
 

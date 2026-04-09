@@ -6,6 +6,8 @@ use App\DataTables\DataRegistrasiDataTable;
 use App\Http\Controllers\Controller;
 use App\Mail\AccFormulirMail;
 use App\Models\PMBCBTModel;
+use App\Models\PMBGelombangModel;
+use App\Models\PMBJalurMasukModel;
 use App\Models\PMBRegistrasiModel;
 use App\Services\RegistrasiService;
 use Exception;
@@ -13,6 +15,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class CalonMahasiswaController extends Controller
 {
@@ -32,7 +37,105 @@ class CalonMahasiswaController extends Controller
 
     public function index(DataRegistrasiDataTable $dataTable)
     {
-        return $dataTable->render("pmb.calon-mahasiswa.data-registrasi");
+
+        $gelombang = PMBGelombangModel::lazy();
+        $jalurMasuk = PMBJalurMasukModel::with(['jalur'])->lazy();
+
+        return $dataTable->render("pmb.calon-mahasiswa.index", compact('gelombang', 'jalurMasuk'));
+    }
+
+
+    public function export_calon_mahasiswa(Request $request)
+    {
+
+        // $dataValid = $request->validate(['pmb_gelombang_id' => ['not_in:Pilih']]);
+
+        $gelombangId = $request->get('pmb_gelombang_id');
+
+        // $jaluMasukId = $request->get('pmb_jalur_masuk_id');
+
+        // if ($gelombangId != "Pilih" && $jaluMasukId != "Pilih") {
+
+        //     $dataCalonMahasiswa = PMBRegistrasiModel::where(['pmb_gelombang_id' => $gelombangId, 'pmb_jalur_masuk_id' => $jaluMasukId])->get();
+        // }
+
+        if ($gelombangId != "Pilih") {
+            $dataCalonMahasiswa = PMBGelombangModel::with(['registrasi' => function ($queryRegistrasi) {
+
+                return $queryRegistrasi->with(['users', 'jalur_masuk' => function ($queryJalurMasuk) {
+                    return $queryJalurMasuk->with(['gelombang', 'jalur']);
+                }]);
+                // return $queryRegistrasi->select(['id', 'pmb_gelombang_id']);
+            }])->where(['id' => $gelombangId])->get()->first();
+            // $dataCalonMahasiswa = PMBRegistrasiModel::where(['pmb_gelombang_id' => $gelombangId])->get();
+        }
+        // return response()->json($dataCalonMahasiswa);
+        // if ($jaluMasukId != "Pilih") {
+
+        //     $dataCalonMahasiswa = PMBRegistrasiModel::where(['pmb_jalur_masuk_id' => $jaluMasukId])->get();
+        // }
+
+        // Buat spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Header
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama');
+        $sheet->setCellValue('C1', 'Jenis Kelamin');
+        $sheet->setCellValue('D1', 'Tempat Lahir');
+        $sheet->setCellValue('E1', 'Tanggal Lahir');
+        $sheet->setCellValue('F1', 'Alamat');
+        $sheet->setCellValue('G1', 'Asal Kecamatan');
+        $sheet->setCellValue('H1', 'RT');
+        $sheet->setCellValue('I1', 'RW');
+        $sheet->setCellValue('J1', 'Provinsi');
+        $sheet->setCellValue('K1', 'HP Orang Tua');
+        $sheet->setCellValue('L1', 'HP Calon Mahasiswa');
+        $sheet->setCellValue('M1', 'WhatsApp');
+        $sheet->setCellValue('N1', 'Agama');
+        $sheet->setCellValue('O1', 'Asal Sekolah');
+        $sheet->setCellValue('P1', 'Email');
+        $sheet->setCellValue('Q1', 'Nomor Registrasi');
+        $sheet->setCellValue('R1', 'Gelombang');
+        $sheet->setCellValue('S1', 'Tahun gelombang');
+        $sheet->setCellValue('T1', 'Jalur Masuk');
+
+
+        $indexData = 2;
+        $nomor = 1;
+
+        foreach ($dataCalonMahasiswa->registrasi as $registrasi) {
+
+            $sheet->setCellValue("A" . $indexData, $nomor++);
+            $sheet->setCellValue("B" . $indexData, $registrasi->nama);
+            $sheet->setCellValue("C" . $indexData, $registrasi->jenis_kelamin);
+            $sheet->setCellValue("D" . $indexData, $registrasi->tempat_lahir);
+            $sheet->setCellValue("E" . $indexData, $registrasi->tanggal_lahir);
+            $sheet->setCellValue("F" . $indexData, $registrasi->alamat);
+            $sheet->setCellValue("G" . $indexData, $registrasi->asal_kecamatan);
+            $sheet->setCellValue("H" . $indexData, $registrasi->rt);
+            $sheet->setCellValue("I" . $indexData, $registrasi->rw);
+            $sheet->setCellValue("J" . $indexData, $registrasi->provinsi);
+            $sheet->setCellValue("K" . $indexData, $registrasi->hp_ortu);
+            $sheet->setCellValue("L" . $indexData, $registrasi->hp_mahasiswa);
+            $sheet->setCellValue("M" . $indexData, $registrasi->no_wa);
+            $sheet->setCellValue("N" . $indexData, $registrasi->agama);
+            $sheet->setCellValue("O" . $indexData, $registrasi->asal_sekolah);
+            $sheet->setCellValue("P" . $indexData, $registrasi->users->email);
+            $sheet->setCellValue("Q" . $indexData, $registrasi->nomor_registrasi);
+            $sheet->setCellValue("R" . $indexData, $registrasi->jalur_masuk->gelombang->nama);
+            $sheet->setCellValue("S" . $indexData, $registrasi->jalur_masuk->gelombang->tahun);
+            $sheet->setCellValue("T" . $indexData, $registrasi->jalur_masuk->jalur->nama);
+
+            $indexData++;
+        }
+
+
+        return response()->streamDownload(function () use ($spreadsheet) {
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, 'data_pendaftaran.xlsx');
     }
 
     public function detail_registrasi($registrasiId)
