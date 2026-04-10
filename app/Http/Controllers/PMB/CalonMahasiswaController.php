@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -100,6 +99,7 @@ class CalonMahasiswaController extends Controller
         $sheet->setCellValue('R1', 'Gelombang');
         $sheet->setCellValue('S1', 'Tahun gelombang');
         $sheet->setCellValue('T1', 'Jalur Masuk');
+        $sheet->setCellValue('U1', "Status Registrasi");
 
 
         $indexData = 2;
@@ -127,10 +127,10 @@ class CalonMahasiswaController extends Controller
             $sheet->setCellValue("R" . $indexData, $registrasi->jalur_masuk->gelombang->nama);
             $sheet->setCellValue("S" . $indexData, $registrasi->jalur_masuk->gelombang->tahun);
             $sheet->setCellValue("T" . $indexData, $registrasi->jalur_masuk->jalur->nama);
+            $sheet->setCellValue("U" . $indexData, $registrasi->status_registrasi);
 
             $indexData++;
         }
-
 
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);

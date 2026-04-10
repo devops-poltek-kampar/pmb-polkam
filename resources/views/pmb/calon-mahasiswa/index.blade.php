@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="row">
+    <div class="row mt-3">
         <div class="card">
             <div class="card-header">
                 <h3>Data Registrasi</h3>
